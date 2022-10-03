@@ -1,0 +1,254 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+} 
+
+\usepackage{tikz-network}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\title{Computer Architecture\\and system programming}
+\date{2022}
+\author{Kristoffer Klokker}
+
+\usepackage{xcolor,listings}
+\usepackage{textcomp}
+\usepackage{color}
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{HTML}{C42043}
+\definecolor{backcolour}{HTML}{F2F2F2}
+\definecolor{bookColor}{cmyk}{0,0,0,0.90}  
+\color{bookColor}
+
+\lstset{upquote=true}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\numberstyle,
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=3,
+}
+
+
+\lstset{style=mystyle}
+\usepackage{zref-base}
+
+\makeatletter
+\newcounter{mylstlisting}
+\newcounter{mylstlines}
+\lst@AddToHook{PreSet}{%
+  \stepcounter{mylstlisting}%
+  \ifnum\mylstlines=1\relax
+    \lstset{numbers=none}
+  \else
+    \lstset{numbers=left}
+  \fi
+  \setcounter{mylstlines}{0}%
+}
+\lst@AddToHook{EveryPar}{%
+  \stepcounter{mylstlines}%
+}
+\lst@AddToHook{ExitVars}{%
+  \begingroup
+    \zref@wrapper@immediate{%
+      \zref@setcurrent{default}{\the\value{mylstlines}}%
+      \zref@labelbyprops{mylstlines\the\value{mylstlisting}}{default}%
+    }%
+  \endgroup
+}
+
+% \mylstlines print number of lines inside listing caption
+\newcommand*{\mylstlines}{%
+  \zref@extractdefault{mylstlines\the\value{mylstlisting}}{default}{0}%
+}
+\makeatother
+
+
+\newcommand\numberstyle[1]{%
+    \footnotesize
+    \color{codegray}%
+    \ttfamily
+    \ifnum#1<10 0\fi#1 |%
+}
+
+
+\begin{document}
+	\maketitle
+	\clearpage
+	\tableofcontents
+	\clearpage
+	\section{Exercises}
+		\subsection{Benchmark}
+			For the 40MHz processor which performed the instructions\\[4mm]
+			\begin{tabular}{c c c}
+				 \hline
+				 Instruciton type & Instruction count & Cycles per instruction\\
+				 \hline
+				 Integer artihemtic & 41,000 & 1\\
+				 Data transfer & 28,000 & 2\\
+				 Floating point & 25,000 & 2\\
+				 Control transfer & 6,000 & 2\\
+				 \hline
+			\end{tabular}
+			\subsubsection{Find the average CPI}
+				$$\frac{1\cdot 41000+2\cdot 28000+2\cdot 25000 + 2\cdot 6000}{100000}=1.59$$
+				CPI is the average cycles pr instruction. Therefore 4.5
+			\subsubsection{Execution time}
+				\begin{align*}
+					CPI&=1.59\\
+					I_c&=100000\\
+					\tau&=\frac{1}{f}=\frac{1}{40000000Hz}\\
+					 T&=I_c\cdot CPI \cdot \tau \\
+					 &= 1.59\cdot 100000\cdot \frac{1}{40000000Hz}\\
+					 T&=0.003975s
+				\end{align*}
+			\subsubsection{MIPS}
+				\begin{align*}
+					MIPS=\frac{f}{CPI\cdot 10^6}\\
+					CPI&=1.59\\
+					f=40000000Hz\\
+					MIPS=\frac{40000000Hz}{1.59\cdot 10^6}\\
+					MIPS=25.16\frac{1}{s}
+				\end{align*}
+		\subsection{Explain how a negative number is represnted in the following representation}
+			\begin{itemize}
+				\item Sign-magnitude - The left most bit must be 1 which result in the rest being interpretated as negative
+				\item Twos compliment - The left most bit is 1 to subtract the maximum value from the rest
+				\item Biased - Bias is most usually half the range therefore a negative value is simply less half the maximum value
+			\end{itemize}
+		\subsection{Represent the following in 8 bit twos compliment and sing magnitude}
+			\begin{itemize}
+				\item 64 - 00100000
+				\item -28 - twos 11100100 - sign 10011100
+			\end{itemize}
+		\subsection{Convert from twos compliment to decimal}
+			\begin{itemize}
+				\item 1100110 : -26
+				\item 1011101 : -35
+			\end{itemize}
+		\subsection{Show the calculations in 8 bit twos compliment}
+			\subsubsection{6+12}
+				\begin{align*}
+					6=00000110\\
+					12=00001100\\
+					00000110+00001100=00010010
+				\end{align*}
+			\subsubsection{-6+12}
+				\begin{align*}
+					-6=11111010\\
+					12=00001100\\
+					11111010+00001100=00000110
+				\end{align*}
+				Overflow is ignored
+			\subsubsection{6-12}
+				\begin{align*}
+					6=00000110\\
+					-12=11110100\\
+					00000110+11110100=11111010
+				\end{align*}
+			\subsubsection{-6-12}
+				\begin{align*}
+					-6=11111010\\
+					-12=11110100\\
+					11111010+11110100=11101110
+				\end{align*}
+				Overflow is ignored
+		\subsection{Fill out the table for the most twos compliment addition}
+				\begin{table}[h!]
+				\begin{tabular}{ccc|ccc}
+				\hline
+				          & Input     &           &           & Output    &   \\ \hline
+				$x_{n-1}$ & $y_{n-1}$ & $c_{n-2}$ & $z_{n-1}$ & $c_{n-1}$ & v \\ \hline
+				0         & 0         & 0         & 0         & 0         & 0 \\
+				0         & 0         & 1         & 0         & 0         & 1 \\
+				0         & 1         & 0         & 1         & 0         & 0 \\
+				0         & 1         & 1         & 0         & 1         & 0 \\
+				1         & 0         & 0         & 1         & 0         & 0 \\
+				1         & 0         & 1         & 0         & 1         & 0 \\
+				1         & 1         & 0         & 1         & 1         & 0 \\
+				1         & 1         & 1         & 1         & 1         & 1 \\ \hline
+				\end{tabular}
+				\end{table}
+				Here $x_{n-1}$ and $y_{n-1}$ is the most signifact bits of the two addends.\\
+				$c$ is the carry bit and $z_{n-1}$ is the results most significatn bit. \\
+				$v$ is a bit singnaling overflow.\\
+				If can be seen in row 2 and the last row that:\\
+				Overflow occurs if and only if the carry into the addition of the MSBs isdifferent from the carry out of that addition
+		\subsection{Convert 23 and 29 to 6 bit twos compliment and multiply using Booths algorithm}
+				\begin{align*}
+					23=010111\\
+					29=011101\\
+					A=0\\
+					Q_{-1}=0\\
+					M=010111\\
+					Q=011101\\
+					count=5\\[4mm]
+					Q_0,Q_{-1}=10\\
+					A=A-M=101001\\
+					shift\; A=101001\; Q=011101\; Q_{-1}=0\\
+					A=110100\\
+					Q=101110\\
+					Q_{-1}=1\\
+					count=4\\[4mm]
+					Q_0,Q_{-1}=01\\
+					A=A+M=110100+010111=001011\\
+					shift\\
+					A=000101\\
+					Q=110111\\
+					Q_{-1}=0\\
+					count=3\\[4mm]
+					Q_0,Q_{-1}=10\\
+					A=A-M=000101-011001\\
+					A=000101+101001=101110\\
+					shift\; A=101110\; Q=110111\; Q_{-1}=0\\
+					A=110111\\
+					Q=011011\\
+					Q_{-1}=1\\
+					count=3
+				\end{align*}
+				\begin{align*}
+					Q_0,Q_{-1}=11\\
+					shift\; A=110111\; Q=011011\; Q_{-1}=1\\
+					A=111011\\
+					Q=101101\\
+					Q_{-1}=1\\
+					count=2\\[4mm]
+					Q_0,Q_{-1}=11\\
+					shift\; A=111011\; Q=101101\; Q_{-1}=1\\
+					A=111101\\
+					Q=110110\\
+					Q_{-1}=1\\
+					count=1\\[4mm]
+					Q_0,Q_{-1}=01\\
+					A=A+M=111101+011001\\
+					A=010100\\
+					shift\; A=010100\; Q=110110\; Q_{-1}=1\\
+					A=001010\\
+					Q=011011\\
+					Q_{-1}=0\\
+					count=0\\[4mm]
+					010111\times 011101 = AQ=001010011011
+					\end{align*}
+		
+\end{document}

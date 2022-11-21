@@ -754,7 +754,337 @@ _start:
 				\item Round towards $-\infty$
 				\item Round towards 0
 			\end{itemize}
-			 
-		
+	\section{The Memory Hierarchy: Locality and Performance}
+		\subsection{Locality}
+			Locality is the act of caching memory or instructions.\\
+			Locality comes in two types
+			\begin{itemize}
+				\item Temporal Locality  - Recent used data which is saved in case of reuse
+				\item Spacial Locality - Data around gathered data
+			\end{itemize}
+			Temporal locality is very usefull since many studies have found that many programs tends to use a small amount of data a lot and have access to a larger amount of data.\\
+			Likewise with spacial is the probability high espacialy for code since its most linear that surrounding data is usefull in the future.
+		\subsection{Memory systems}
+			Glossery
+			\begin{itemize}
+				\item Word - A unit of length depending on system intel x86 32 bit
+				\item Addressable units - The amount of addresses
+				\item Unit of transfer - Number of bits written or read to/from main memory
+				\item Sequential access - Data is stored in linear form in records which is moved around in units
+				\item Direct access - Memory is assigned to a physcial address
+				\item Random access -  Data is assigned to unique addressing mechanism
+				\item Associative - Type of random access memory which compares address data
+				\item Access time (latency) - Time to perforam a read or white operation
+				\item Memory cycle time - Time to reset memory in RaM
+				\item Transfer rate - the speed ofwhich data is transfered denoted $T_n=T_a+\frac{n}{R}$, $T_n=$aver time to read/write $n$ bits, $T_A$=average acces time, $n$= number of bits, $R=$ transfer rate
+			\end{itemize}
+		\subsection{Multilevel Memory Hierarchy}
+			The memory hierarchy is used to distribute data such larger data capacity has slower acces time, to compensate cost.\\
+			 The hierarchy is groped as
+			 \begin{itemize}
+			 	\item Registers
+			 	\item On-chip cache
+			 	\item Off-chip cache
+			 	\item Main memory
+			 	\item Flash memory
+			 	\item Disk
+			 	\item Off-line storage
+			\end{itemize}
+			on-chip cache is often implemented using SRAM and off-chip cache using eDRAM.\\
+			Cache unlike other memory is not visible to the programmer and is hardware controlled.\\
+			External nonvolatile memory is refered to as secondary,- or auxiliary memory\\
+			For implemneting a memory hiarachy the following must be supported
+			\begin{itemize}
+				\item Locality 
+				\item Inclusuin - Given data in one level the same data must be exist as a copy on all higher levels
+				\item Coherence - If data is modified all copies must also be updated
+			\end{itemize}
+	\section{Cache}
+		Cache is used for temporary storage for faster access.\\
+		When data is not present in the cache a copy is read into the cache from which the CPU read the data.\\
+		The cache consts of blocks which is the minumum size of data transfer to the cache.\\
+		The blocks is contained in lines which can hold one block.\\
+		A tag is asociated with the line for addressing purposes.\\
+		Each line also include a controle bit indicating if the data in memory has been modified.\\
+		A transfer is often lees than a line which typically is 128 bytes and a block size being 2 bytes.\\
+		Cache is split into data and instructions, since it optimizes for old reuseable data.
+		\subsection{Elements of cache design}
+			High performance computing (HPC) deals with super computers which require a whole different approache to cache.\\
+			A program uses virtual addresses which is translated to physical by the memory management unit (MMU).\\
+			Cache can therefore save the virtual address or the physical.\\
+			By having the virtual a translation is not needed so it is faster, but has to flushed for every new program and bits to the virtual address for different applications.\\
+			Since there is fewer cache lines than memory block a selection and organization has be done.\\
+			The most simple is direct mapping which simply takes the main memory block modulo with the avaliable cache lines which is the address.
+		\subsection{Types of cache misses}
+			\begin{itemize}
+				\item Compulsory Miss - Not present
+				\item Conflict Miss - Data was overwritten
+				\item Capacity Miss - The working set is larger than cache resulting in constant overwritting
+			\end{itemize}
+		\subsection{Associative mapping}
+			Associative mapping allows a physcial address to be placed in any line of cache.\\
+			This therefore requires every line the be checked for data in cache.\\
+			For the SRAM is used which is more expensive and contain less storage, but is able to in parralle in one clock cycle compare each line.\\
+			If the Main memory size is $=2^k$ then $k$ is the physical memory bits.\\
+			The block Size $=2^b$ and $b$ is the block offset.\\
+			The tag bits is then P.A. bits - Block offset.
+		\subsection{Set Association mapping}
+			This is a medium between associativ and direct mapping.\\
+			By dividing the cache into sets which is directly mapped to memory from which the sets are associative.\\
+			Calculating in this can be done as:\\
+			Line numbers: lines\\
+			MM address: x bit system\\
+			Block size\\
+			offset = log(blocksize)t \\
+			set number bits = index = log(line  numbers)/(log(number of sets associated))\\
+			tag  = log(MM) - offset - index\\
+			This then constructs the address with the same address size as the rest of the system but in the form\\
+			Tag| Index | Offset\\
+			So the address the first bits will be the tag, the next number of bits will be the index (i.e. the set it associated with) and the last bits will be the offset in the data.
+			The index will then be at a set in which the cpu can search the the tag.
+		\subsection{Replacement algorithms}
+			Associative and set associative require a replacement algorithm for choosen which cache to be overwritten.\\
+			Least recently used (LRU) keeps a list of most recently used cache, when cache is used it is moved on top.\\
+			When overwritting something the bottom is used.\\
+			First in first out (FIFO) keeps a list of the longest staying cache and overwrites the oldest.\\
+			Least frequently used (LFU) uses a list of counter of use and replaces the least used cache.\\
+		\subsection{Write Policy}
+			When writing cache back to memory there are two cases\\
+			The memory has not been modified\\
+			The memory has been modified.\\
+			Memory may have been overwritten by the I/O or other caches.\\
+			Write through every update in cache is updated in memory which requires a lot of memory traffic.\\
+			Write back requires every write to happen in cache, when something is updated a cache a dirty bit is set from which memory can be updated\\
+			In case of write miss there are to approaches
+			\begin{itemize}
+				\item Write allocate - The block containing the word to be written is fetched from memory to cache to then write
+				\item No write allocate - The block containing the word is written directly in memory
+			\end{itemize}
+			No write allocate is most often used with write through, but the amount of moving proves inefficient.\\
+			Write back and write allocate is most used, due writting to both cache and memory due to in a miss it will hit cache next time and setting the dirty bit for the block\\
+			In case of multiple devices with cache a cache coherency is needed, approaches can be
+			\begin{itemize}
+				\item Bus watching with write through - Each cache controller check memory of cached data and if updated invalidates local cache
+				\item Hardware transparent - hardware is used to update modified memory in all caches
+				\item Noncachable memory - shared memory is not cachable
+			\end{itemize}
+		\subsection{Line size}
+			The larger the line size the higher chance is relevant adjesant data is fetched.\\
+			But larger lines overwrittes old cache and less blocks can be in cache at once.\\
+			For larger lines the adjesant words becomes less likely to be used.\\
+			An optimum is found of 8 ti 64 bytes.
+		\subsection{Inclusion policy}
+			Inclusive policy dictates that data in one cache is guarenteed to be in all lower levels of cache. \\
+			This simplifies searching since the can be done in smallest fastest caches first and moving up.\\
+			Exclusive policy dictates that cache is guaranteed to not be in lower levels of cache, this is done to not waste space but requires more intense searching.\\
+			Noninclusive policy dictates that nothign is guarteed about placement of cache. 
+		\subsection{Cache timing models}
+			$t_{ct}=$ compare time of tag address and tag value in cache\\
+			$t_{rl}=$time to read a line from cache to retrieve data block in cache\\
+			$t_{xb}=$ time needed to transmit byte or word to the processor\\
+			$t_{hit}=$ time spend on cache level in case of hit\\
+			$t_{miss}=$ time spend in cache in case of miss\\
+			\textbf{Direct mapped cache}\\
+			$t_{hit}=t_{rl}+t_{xb}$\\
+			$t_{miss}=t_{rl}+t_{et}$\\
+			\textbf{Associative set cache}\\
+			$t_{hit}=t_{rl}+t_{xb}+(1-F_p)t_{et}$ where $F_p$ is the fraction of time that the way preduction succeeds\\
+			$t_{miss}=t_{rl}+t_{et}$\\
+			For the associate cache it is the same as set but $t_{miss}=t_{rl}+t_{et}$
+		\subsection{Performance modeling of multilevel memory hierarchy}
+			For finding the average time to acces an item it can be expressed as:
+			$$T_s=H\cdot T_1+(1-H)\times (T_1+T_2)$$
+			$$T_s=T_1+(1-H)\cdot T_2$$
+			$T_1=$ Acces time of fastest memory\\
+			$T_2=$ Access time to second level of memory\\
+			$H=$ hit ratio\\
+			$$\frac{T_1}{T_s}=\frac{1}{1+(1-H)\frac{T_2}{T_1)}}$$\\
+			$\frac{T_1}{T_s}=$ Access efficiency.\\
+			
+	\section{Internal Memory}
+		\subsection{Semiconductor main memory}
+			When talking about memory it is refered to as RAM (Random Access Memory)
+			RAM comes in two types DRAM and SRAM\\
+			DRAM (Dynamic) uses capacitors to store charge, the charge can then be interpretted as 1 if charge is above a threshold.\\
+			The memory cell uses a transistor such two lines comes in a bit line and address line, the address line starts the circuit, if bit line is off it can be charged by the capacitor,\\
+			If the bit line is one the capacitor will be charged.\\
+			The dynamic name comes from the need to recharge due to the slow lost of charge in the capacitors.\\
+			SRAM (Static) uses flip flops to store memory and therefore is digital instead of analog\\
+			DRAM is cheaper but SRAM is faster and therefore used for cache memory.\\
+			ROM (Read Only Memory) has to advantage of being hard coded such it is nonvolatile and fast.\\
+			PROM is the programmable version but more expensive.\\
+			Read Most Memory is for memory which is most read version of this includes
+			\begin{itemize}
+				\item EPROM - Erasable Programmable Read Only Memory is a programmable ROM which can be deleted using UV lighting
+				\item EEPROM - Electrical EPROM can be erased with electricity insetead of UV and is faster
+				\item Flash memory - Is the fastest EPROM and provides erasabillity down to chunks but not bytes and has high density
+			\end{itemize}
+			The architecture of the memory cell is controlled by a chip.\\
+			The architecture decissions may include how big chunks the memory cell should be ex 8 Mbit chip organized in 1M x 8 memory cells.\\
+			This chips uses a multiplexer to convert the numbering of the cell into an electrical signal to the cell.\\
+			The chip then has input to wether a read or write should be performed and the output.\\
+			The architecture can therefore also chain multiple chips together for larger amount of memory but keeping clustered memory cells.\\
+			eDRAM is memory between the memory and chip often named L4 cache.
+			\subsubsection{Error correction}
+				For error correction parity bits are used.\\
+				These are extra bits used to ensure the stored bits are correct.\\
+				When writing or reading to memory, is the memory inserted into a function. This function generates check bits in a given way.\\
+				When reading the checkbits and the memory is gathered, the memory is once again inserted into the function and the new checkbits is XOR'ed with the old creating the syndrome.\\
+				If an error have occoured to syndroms value will be equal to the bit which needs to be flipped.\\
+				This is an example of single-error-correcting (SEC) code.\\
+				Most often does semiconductor have both SEC and double-error-correction code which requirest a bit more.\\
+			\subsubsection{Synchronous DRAM}
+				Normal DRAM when getting request for data will the CPU have to check up if it has been delivered.\\
+				Using synchronous the CPU can instruct on which next cycle the memory should be avaliable.\\
+				SDRAM also makes use of multiple bank (set of chips) to perform parrallel data management.\\
+				SDRAM also allows certain length of burst of data to be written into the bus. Therefore making SDRAM fast at larger chunks of data.\\
+			\subsubsection{DDR DRAM}
+				DDR (Double Data Rate) is a spin on the SDRAM such data is gathered both on up and down clock cycles.\\
+				DDR also uses a higher clock rate for the BUS to increase transfer rate.\\
+				DDR also have a prefetch buffer on the chip, the memory buffer can get both buffer and memory on 1 cycle therefore making it possible for the BUS having the double clock rate.\\
+	\section{External Memory}
+		\subsection{Magnetic Disk}
+			Magnetic disk consist of a recording medium.\\
+			This medium is read by a the head consisting of magnetoresistive (MR) sensor or written to by a magnetic coil.\\
+			The medium is split up into tracks at different radius and these teacks contain sectors at variable length.\\
+			To compensate for different speed at the inner track and outside track the bits are written with different intervals, this therefore result in the outer track stores the same data size the same as inner track.\\
+			Therefore making the density the limit of data.\\
+			Multizone recording is a way to divide tracks into zones which have roughtly the same data density. This allows the data density to be higher the outer the tracks is..\\
+			A sector of data contains
+			\begin{itemize}
+				\item Gap 
+				\item Sync - Indicate start of sector and include timing alignment
+				\item Address mark - Sector data including number, location and status
+				\item Data
+				\item ECC - error correction code
+			\end{itemize}
+			The format is in two ways the old 512 bytes where 50 is ECC and 15 is GAP, SYNC and Address mark.\\
+			The new format is 4k bytes, 100 ECC and 15 GAP, SYNC and Address mark.\\
+			Different types of mangetic disk
+			\begin{itemize}
+				\item Fixed head disk - A head for each track
+				\item Movable head disk - Head moves inbetween tracks
+				\item Nonremovable - Stationary disk unline portable versions
+				\item Double sided - Magnetic coding on both sides of the medium
+				\item Multiple platters - Stacked mediums and reader for more data
+				\item Types of head
+				\begin{itemize}
+					\item Air gap - Where air is present between reader and medium
+					\item No gap - The medium is more robust and allows reader to be on medium
+					\item Winchester - A foil rest on the medium when still and in spin the air pressur lift the foil
+				\end{itemize}
+			\end{itemize}
+			\subsubsection{Performance}
+				$$t_B=t_S+t_L+t_T$$
+				$t_B$ - bloc access time\\
+				$t_S$ - Seek time, head to track\\
+				$t_L$ - Latency time, time for sector to reach head\\
+				$t_L=\frac{1}{2r}$ \\
+				$r$ - Rotation speed in RPS
+				$t_T$ - transfer time from memory to BUS\\
+				$t_T=\frac{b}{rN}$\\
+				$b$ - Number of bytes transfered
+				$N$ - Number of bytes on track
+				Rotational positional sensing (RPS) is a server feature which tries to gain IO access when the data is about to read, if not avaliable it will take a rotation and try again.\\
+		\subsection{RAID}
+			Redundant Array of Independent Disks comes in seben level 0 - 6\\
+			RAID uses a set of physical drives and creates logical drive.\\
+			The data is then distributed across the devices called stripping.\\
+			RAID also provides redundancy method for drive failure in some levels.\\
+			The RAID then also give the ability of faster data trasnfer through multiple IO's\\
+			\begin{enumerate}
+ 				\setcounter{enumi}{-1}
+ 				\item Level - The data is striped out on all disk without any redundancy. The data is striped such continous data is spread out as much, such a single chunk can be split up into every drive.
+ 				\item Level - The data has a full dublicate, makes it two times the speed to get data, relative fast write since it depends only on slow drive, easy backup, lots of required capacity
+ 				\item Level - The data is striped down to byte level, gives fast read and error correction and uses hamming code for parity, require log x extra disk where x is number is disk.
+ 				\item Level - The data is striped down to bytes, parity is on a single drive where pairty bit of the same strip place, fast read due to byte level strip
+ 				\item Level - The data is striped in larger chunks, parity is depends on strips therefore making write time slower, for high I/O request fast but not big transfer
+ 				\item Level - Like level 4 but larger strip to prevent I/O bottle neck in RAID 4
+ 				\item Level - Like Level 5 but another disk is also used with another pairty method such two drives can fail
+			\end{enumerate}
+		\subsection{Solid State Drives}
+			SSD make use of the NAND flash.\\
+			The SSD has:
+			\begin{itemize}
+				\item Higher input/output operations per second (OPS)
+				\item More durability to physical factors
+				\item Longer lifespan due to no moving parts
+				\item Lower power consumption
+				\item Lower access time and latency rate
+			\end{itemize}
+			The SSD also contain beside the flash
+			\begin{itemize}
+				\item Controller for interface and firmware execution
+				\item Addressing 
+				\item Data buffer/cache
+				\item Error correction logic and detection
+			\end{itemize}
+			The downside of the SSD is scattering problem. When data is scattered into multiple cell as consequence of filling up cell the write and read time will slow down.\\
+			The cell is also typically limited around 100,000 writes.
+		\subsection{Optical memory}
+			CDs and CD-ROMs are optical disk used for storing data.\\
+			With techniques like the HDD but with optical lasers.\\
+			Uses variable rotation speed, with a laster at a constant linear velocity.\\
+			The optical disk is engraved such at flat level represent 0 and changes in level represent 1.\\
+			The data is split into block of
+			\begin{itemize}
+				\item Sync - byte of 0, 10 bytes of 1 and a byte of 0
+				\item Header - represent the following data and if error correction is at place
+				\item Data
+				\item Auxiliary - either extra data or error correction according to header
+			\end{itemize}
+			It has the advantage of cheap mass production and ability of storage of data and saving of data as backup.\\
+			CD-Recordable (CD-R) is a CD with a consumer friendly write \\
+			CD-Rewriteable (CD-RW) can be written to multiple times using a phase changeable crystal, with a limited amount of erase cycles\\
+			Digital Versatile Disk (DVD) is a more compact solution to CDs with capacity up to 4.7 GB\\
+			Blueray used like DVD a finer laser resulting in more density up to 25 GB.
+	\section{C programming language}
+		C is a performance constrained language which focuse on minimzing runtime overhed.\\
+		It is in direct controle of memory and compiles to native code.\\
+		Was designed for implementing UNIX\\
+		C has no support for
+		\begin{itemize}
+			\item Objects
+			\item Exceptions
+			\item Function overloading
+			\item range check on arrays
+			\item Garbage collection
+			\item Limited type safety
+		\end{itemize}
+		To combat no run time error sanitizers are used. These run efore compilling checking for essentially run time errors.\\
+		Compiling C is done using gcc, this can be to object files using -c or directly to executable\\
+		To get warnings -Wall and for more warning -Wextra.\\
+		For debug -g is used.\\
+		So a good compile command should be:\\
+		gcc -Wall -Wextra -g -fsanitize=address -fsanitize=leak -fsanitize=undefined\\
+		Valgrind is an alternative to sanitizers which runs the program in a virtual a machine using:\\
+		valgrind -leak-chek=fall -track-origins=yes ./myProg arg1 arg2\\
+		The C program uses a main in the form int main(int argc, char **argv) or with just void.\\
+		An ampty parameter means the function takes any number of parameters.\\
+		Lines starting with \# is used for preproccesing such as inclusions or macros\\
+		Macros simply takes blindly and copies the macro into the wanted places.\\
+		Macros are made as: \#define PI 3.14 and undefined by \#undef PI\\
+		Preprocessing can also use condictions like \#ifdef DEBUG where -DEBUG is an argument to gcc\\
+		For negative variables signed versions is used\\
+		\includegraphics[width=300px]{assets/cDataSize.png}\\
+		For error handling goto are often used as exceptions.\\
+		Arrays are initialed by: int arr[10] = \{1,2,3\} where the rest is just zeros.\\
+		Pointers are made by: *p = \&i where i may be i = 42\\
+		Using **p = \&p wil then be the pointer to the value of i ie 42\\
+		Additions to pointers is allowed and good use for array pointers.\\
+		Strings are made by char str[] = "Hello"
+		\subsection{IO}
+			getchar and putchar for single character input output to std\\
+			printf writes string to stdout including formatting.\\
+			scanf is the read equivalent\\
+			s version of printf and scanf does not include length check.\\
+		\subsection{Memory allocation}
+			Effective type is the type which the object relies on.\\
+			malloc is used for allocation space, with no effective type until wirtten, and returns a pointer to start of allocated space.\\
+			sizeof returns the size of an object type, ex sizeof(int)\\
+			free function free up the space after use and takes a pointer to the space which the free up.\\
+			calloc allocates space and fille with zeros\\
+			realloc is reallocating memory from one place to new place. The old pointer should never be used.\\
+				
 			
 \end{document}

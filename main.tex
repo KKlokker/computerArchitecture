@@ -1085,6 +1085,71 @@ _start:
 			free function free up the space after use and takes a pointer to the space which the free up.\\
 			calloc allocates space and fille with zeros\\
 			realloc is reallocating memory from one place to new place. The old pointer should never be used.\\
-				
-			
+	\section{I/O}
+		I/O modules contains logic for communicating between peripherals and system bus.\\
+		The module is reqired handling peripherials data format and mismatch between data transfer rate of processor and peripherals\\
+		Peripherals is split up into three categories: Human readable, machine readeable, and communication for remote devices.\\
+		Control logic associated with the I/O module controls peripherals in response to direction from IO module.\\
+		Transducer convert electrical signal to digital input, often with a buffer most often 8 to 16 bits or larger if block oriented.\\
+		The functions of the IO modules comes in categories
+		\begin{itemize}
+			\item Control and timing - coordinate flow of traffic between internal and external ressources
+			\item Processor communication - Command decoding from processor to peripherals, data transfer between bus and peripherals, status reporting of devices, address recognition of peripherals
+			\item Device communication - Commands, status information and data
+			\item Data buffering - buffer data in case of different speeds
+			\item Error detection - Error detection of mechinal and electrical malfunctions and error detection code
+		\end{itemize}
+		Three techniques are possible for I/O operations
+		\begin{itemize}
+			\item Programmed I/O - The program gets full control of IO, the processor must wait for next execution with IO and check when status is open for when finished
+			\item Interrupt-driven I/O - Uses programmed I/O but interrupts the processor when done, such it can handle the data
+			\item Direct memory access (DMA) - Uses interrupt driven IO but is able to transfer data to main memory itself
+		\end{itemize}
+		\subsection{Programemd I/O}
+			IO commands consist of which IO module, which peripheral and what command.\\
+			The commands is classified as
+			\begin{itemize}
+				\item Control - activate peripheral and issue a command
+				\item Test - Test condition of IO module and peripherals
+				\item Read - Obtain data from peripheral and place in internal buffer
+				\item Write - Take data from system bus and transmit to peripheral
+			\end{itemize}
+			For addressing a peripheral there are two ways, memory-mapped I/O uses a single address space for memory location and IO devices, such peripherals is treated as memory locations.\\
+			The other is isolated I/O uses a single read  line and single write line on bus, such it specifies wether a memory location or peripheral is being addressed. 
+		\subsection{Interrupt-driven I/O}
+			The main idea is the IO module will interrupt the processor once done\\
+			When the IO module completes an operation the follwoing steps is done.
+			\begin{enumerate}
+				\item I/O device issue interrupt singal to processor
+				\item Processor finishes what currently is going on and responds
+				\item Processor test for interrupt to find module and issue an acknowledgement signal to remove interrupt signal
+				\item Prepare to work with IO module by saving next instruction in the program status word (PSW), and registers onto the system control stack
+				\item Next instruction for the processor is set to the interrupt handling program
+				\item The interrupt is then handled where the whole IO is handled
+				\item Registers and PSW instruction is retrieved
+			\end{enumerate}
+			For the processor to find the IO module which raised an interrupt there are different design approaches\\
+			Multiple interupt lines between processor and IO modules, but is impractical to dedicate multiple bus lines.\\
+			Software poll essentially ask every module until it find the correct one, but it is slow.\\
+			Daisy chain is hardware poll which chain every IO module and an ack is sent to all, from which it will be answered by the correct one, from which it can be identified called a vector.\\
+			Bus arbitration also use vectored interrupts as in daisy chain which uses the bus to place the vector.\\
+		\subsection{Direct Memory Access}
+			The problem with Interrupt and programmed IO is the limited speed of which the processor can check for interrupt and the processor being tied up on IO transfers.\\
+			The DMA module is a moduel which connects to the IO and handles IO processes.\\
+			The DMA then only uses the bus when data has to be transfered and then steals cycles from the processor to use the system bus.\\
+			The DMA is commanded by sending a read or write controle line, the address of the wanted IO device, starting point of read / write, and the amount to write / read.\\
+			The DMA module is then able to handle memory and IO directly without the processor, and once done sends an interupt signal to the processor.\\
+			The DMA module can be connected to IO via the system bus, the IO can be connected directly to the DMA module or the IO is on a bus between the DMA and other IOs.\\
+		\subsection{Direct cache access}
+			Problem with DMA is it is too slow for some speeds today.\\
+			DCA uses the last level cache of the processor instead of main memory.\\
+			This can be seen when using networking at high speeds\\
+			The multiple unwrapping of protocols would result in many back and forward interaction between cache and main memory.\\
+		\subsection{I/O channels and processors}
+			An IO channel is an extension to DMA which make it able to itself execute IO instruction, such the CPU does not do any IO processing.\\
+			Instruction is stored in main memory and executed by a special purpose processor for the IO channel.\\
+			The instruction then include the needed infromation to perform the IO action.\\
+			There are two common types of IO channels.\\
+			Selector channel controls multiple high-speed deivces at one at a time. \\
+			A multiplexor channel works with a larger set of device at the same time with slower data throughput but can chain reads from different devices.
 \end{document}

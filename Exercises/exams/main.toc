@@ -1,0 +1,18 @@
+\contentsline {section}{\numberline {1}2019}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Question}{4}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Convert $A$ and $B$ to binary}{4}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}Interpret $A$ and $B$ as signed integers in two’s complement representation. What aretheir decimal values?}{4}{subsubsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.3}With the same interpretation of A and B as above, consider their potential multiplication using Booth’s algorithm.}{4}{subsubsection.1.1.3}%
+\contentsline {subsubsection}{\numberline {1.1.4}Still interpreting $A$ and $B$ as signed integers in two’s complement representation, perform the subtraction $B-A$ in binary. Indicate the result and argue whether overflow occurred or not.}{4}{subsubsection.1.1.4}%
+\contentsline {subsubsection}{\numberline {1.1.5}What is the decimal value of $C$ and $D$?}{6}{subsubsection.1.1.5}%
+\contentsline {subsection}{\numberline {1.2}Question}{6}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Write the truth table for $F$}{6}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Based on the Karnaugh map, write a minimal Boolean expression for $F$.}{6}{subsubsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.3}Question}{7}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Describe the address format for using the cache}{8}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Imagine 6 alternate realities where the next memory request is to read or write to each of the following addresses (written here in hexadecimal). For each scenario, describe whether there is a hit or miss in the cache.}{8}{subsubsection.1.3.2}%
+\contentsline {subsubsection}{\numberline {1.3.3}The cache has multiple lines per set, so the depiction above does not show all fields. Assume the replacement algorithm used in the cache is LRU, which maintains an additional bit per cache line. Compared to the actual data stored in the cache, how many percent additional memory is used in the cache for all required meta-data?}{8}{subsubsection.1.3.3}%
+\contentsline {subsubsection}{\numberline {1.3.4}We would like to use this cache design for the cache in each processor in an symmetric multi-processing system. However, the caches are to be kept coherent using the MESI protocol. Which changes to the cache organisation are needed, if any?}{9}{subsubsection.1.3.4}%
+\contentsline {subsection}{\numberline {1.4}Question}{9}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}The program would like to send the following 8 bits of data, written from left to right as $d1,d2,. . . ,d8$:1111 0001. Compute the corresponding 12-bit Hamming code, and indicate the check bits.}{9}{subsubsection.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.4.2}The program is receives the following 12 bits in response, written from left to right as $b1,b2,. . ., b12$ :1001 1100 0001. Assuming that at most 1 single-bit error has occurred,compute the 8-bit message.}{9}{subsubsection.1.4.2}%

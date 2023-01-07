@@ -398,6 +398,183 @@ for (i=1; i<n; i++) {
 			C index 12 miss\\
 			D index 2 still valid\\
 			E index 8 miss
-			
+	\section{Exercises}
+		\subsection{In virtually all systems that include DMA modules, DMA to main memory is given higher priority that CPU access to main memory. Why?}			
+			Since it works on stealing cycles, in case of CPU having higher priority, it would not be able to steal cycles.
+		\subsection{If we were to examine the timing diagram for the 8237A, we would find that once a block transfer begins, it takes three bus clock cycles per DMA cycle. During the DMA cycle, the 8237A transfers one byte of information between memory and I/O device}
+			\subsubsection{Suppose we clock the 8237A at a rate of 8 MHz. How long does it take to transfer one byte?}
+				1 byte transfer between ememory and IO device,3 clock cycles for one DMA cycle.\\
+				$$\frac{3}{\frac{1000000}{s}}=0.000003s$$
+			\subsubsection{What would be the maximum attainable data transfer rate?}
+				It took 0.000003s for a byte transfer making the transfer rate \\
+				$$\frac{1byte}{0.000003s}=333kByte$$
+			\subsubsection{Assume that the memory is not fast enough and we have to insert four wait states per DMA cycle. What will be the actual transfer rate?}
+				$$\frac{4}{\frac{1000000}{s}}=0.000004s$$
+				$$\frac{1byte}{0.000004s}=250kByte$$
+		\subsection{If the last operation performed on a computer with an 8-bit word was an addition in which the two operands were 0010 0100 and 0001 0001,what would be the value of the following flags?}
+			The result will be 00110101\\
+			\begin{itemize}
+				\item Carry - 0
+				\item Zero - 0
+				\item Overflow - 0
+				\item Sign - 0 - even if treated as 2s compliement both are positive so result is also positive
+				\item Even parity - 1 - the result has an even number of 1's
+				\item Half-carry - 0 - The left most bit dit not change
+			\end{itemize}
+		\subsection{Repeat the last exercise with -2 and +3}
+			1111 1101 -2\\
+			0000 0011 +3\\
+			0000 0000 0\\
+			\begin{itemize}
+				\item Carry - 1
+				\item Zero - 1
+				\item Overflow - 1
+				\item Sign - 0 
+				\item Even parity - 1
+				\item Half-carry -1
+			\end{itemize}
+		\subsection{Assuming that each pipeline stage takes one cycle, calculate the number of cycles needed to complete executing 10 instructions in a four-stage pipeline. Calculate the speed-up factor for this pipeline compared to serial implementation without a pipeline}
+			The speedup factor 
+			$$\frac{10\cdot 4}{4+(10-1)}=3.08$$ 
+			For the none pipeline it would take 40 cycles, for the pipeline it would only take 13
+		\subsection{A CPU executes programs in the following 6-stage pipeline}
+			\begin{enumerate}
+				\item FI- fetch
+				\item DI - decode
+				\item CO - calculate operand
+				\item FO - fetch operand
+				\item EI - execute
+				\item WO - write out
+			\end{enumerate}
+			Each stage takes 1 clock cycle. However, the memory bandwidth is limited, such that only a single stage can access memory at a time. That is, only one of FI, FO, and WO can access memory in each cycle. In the following, ignore the cache, and assume every operand is storedin memory.
+			\subsubsection{For the following program, draw a timing diagram (like Fig. 16.10, with time and instructions as axes) to represent the instruction pipeline operation. Mark bubbles in the pipeline with DH if the stall is becauseof a data hazard (the data is not yet available), or with SH if it’s because of a structural hazard (memory can’t be accessed).}
+				ADD A,B\\
+				MOV D,B\\
+				SUB, C,A\\
+				ADD A,C\\
+\begin{table}[h!]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+ADD & FI & DI & CO & FO & EI & WO &    &    &    &    &    &    \\ \hline
+MOV &    & FI & DI & CO & FO & EI & WO &    &    &    &    &    \\ \hline
+SUB &    &    & FI & DI & CO & DH & FO & EI & WO &    &    &    \\ \hline
+ADD &    &    &    & FI & DI & CO & DH & DH & DH & FO & EI & WO \\ \hline
+\end{tabular}
+\end{table}
+			\subsubsection{Reorder the instruction to speed up}
+				They can be reordered in a better way since the SUB need the result from the add which is just done when the sub is started, and for the last add it has to wait for the sub anyway
+		\subsection{Analyze assembly code}
+			\includegraphics[width=300px]{assets/assembly20185.png}
+			\subsubsection{identify the liens with the prolog and epilog of the function}
+				rbp is pushed on stack at line 2 and popped at 26
+			\subsubsection{Where is first and last stored at first}
+				the order goes\\
+				\%rdi, \%rsi, \%rdx, \%rcx, \%r8 and \%r9\\
+				So the two first since it a 64 bit long parameter is in the r form.
+			\subsubsection{The function uses the stack for storing data. Show a table of the stack-frame for the function. That is, a list of the entries on the stack created by the function, what they each are used for, and their address relative to the base pointer}
+				MAIN EPB\\
+				Return address of MAIN\\
+				RDI\\
+				RSI\\
+			\subsubsection{The function calls another function,pred, for which we only know that it returns either 0 or 1. How many arguments are passed to pred, assuming the function follows the normal calling convention on 64-bit Linux systems?}
+				RDI
+			\subsubsection{It looks like there is a loop in the function. Identify the lines where the condition for this loop is calculated and used, and describe the loop condition, e.g., in terms of the C variables}
+				The for loop can be identified as label 2 being the condition, label 3 being the addition of the for loop and label 5 being the content of the for loop
+			\subsubsection{Describe the functionality of the function, e.g., by expressing it in higher-level pseudo code or as C code, and a short textual description}
+				First the rdi and rsi is added to the stack.\\
+				It then check if the first paramter is equal to the last. if not it goes to the for loop\\
+				The content of the loop takes the address of first, an parses it to pred and if it return to zero it adds one to first and loops again.\\
+				Otherwise it ends the functions
+	\section{Exercise}
+		\subsection{Consider the follwoing assembly language program}
+			1. Load R2, (R4)\\
+			2. Ble R0 R2 L2\\
+			3. Add R2, R2, 6\\
+			4. Move R1, R2\\
+			5. Load R1, (R5)\\
+			This program includes WAW, RAW and WAR dependencies how these.\\
+			RAW - 4 - 5\\
+			WAW - 3- 4\\
+			WAR - 1 - 3
+		\subsection{Let $a$ be the percentage of program code that can be executed simultaneously by $n$ processors in a computer system. Assume that the remaining code must be executed sequentially by a single processor. Each processor has an execution rate of $x$ MIPS}
+			\subsubsection{Derive an expression for the effective MIPS rate when using the system for exclusive execution of this program, in terms of $n$, $a$, and $x$}
+				$$a\cdot n\cdot x+(1-a)\cdot x$$
+			\subsubsection{If $n = 16$ and $x = 4$ MIPS, determine the value of $a$ that will yield a system performance of 40 MIPS}
+				$$a\cdot 16 \cdot 4MIPS+(1-a)\cdot 4MIPS=40MIPS$$
+				$$a=\frac{3}{5}$$
+		\subsection{Consider a situation in which two processors in an SMP configuration, over time, require access to the same line of data from main memory. Both processors have a cache and use the MESI protocol. Initially, both caches have an invalid copy of the line. Figure 20.13 depicts the consequence of a read of line x by Processor P1. If this is the start of a sequence of accesses, draw the subsequent figures for the following
+sequence}
+			\includegraphics{assets/20.4.png}
+			\subsubsection{P2 reads x}
+				P2 also just reads x into memory and set as shared in both p1 and p2
+			\subsubsection{P1 writes to x (label the line in P1s cache x')}
+				Writes to x in cache, invalidates the p2 cache x and changes its own to modified
+			\subsubsection{P1 writes to x (label the line in P1s cache x'')}
+				Write again withotu changing anything
+			\subsubsection{P2 reads x}
+				Signal p1 to write its modified version to memory and then change it to shared and reads it from memory as shared
+	\section{Exercises}
+		\subsection{You find yourself debugging a program which sends and receives commands over the Internet. Due to the unreliability of the network connection the program uses error-correction codes for messages. Specifically, each 8-bit message is encoded as a 12-bit Hamming code}
+			\subsubsection{The program would like to send the following 8 bits of data, written from left to right as d1,d2. . . d8: 1111 0001. Compute the corresponding 12-bit Hamming code, and indicatethe check bits}
+				1000
+			\subsubsection{The program is receives the following 12 bits in response, written from left to right as b1,b2. . . b12: 1001 1100 0001. Assuming that at most 1 single-bit error has occurred,compute the 8-bit message}
+		\subsection{Boolean Algebra}
+			\subsubsection{Give the Karnaugh Maps for X, Y and Z as a table}
+				\begin{table}[h!]
+				\begin{tabular}{llll}
+				X                       &                         & C                      &                        \\ \cline{3-4} 
+				                        & \multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{1} \\ \cline{2-4} 
+				\multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{00} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{}  \\ \cline{2-4} 
+				\multicolumn{1}{l|}{AB} & \multicolumn{1}{l|}{01} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{}  \\ \cline{2-4} 
+				\multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{10} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{1} \\ \cline{2-4} 
+				\multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{11} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{1} \\ \cline{2-4} 
+				\end{tabular}
+				\end{table}
+				Four circling
+				$$X=A$$
+				\begin{table}[h!]
+				\begin{tabular}{llll}
+				Y                       &                         & C                      &                        \\ \cline{3-4} 
+				                        & \multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{1} \\ \cline{2-4} 
+				\multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{00} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{}  \\ \cline{2-4} 
+				\multicolumn{1}{l|}{AB} & \multicolumn{1}{l|}{01} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{1} \\ \cline{2-4} 
+				\multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{10} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{1} \\ \cline{2-4} 
+				\multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{11} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{}  \\ \cline{2-4} 
+				\end{tabular}
+				\end{table}
+				Four circling
+				$$Y=\overline{A}B+A\overline{B}$$
+				\begin{table}[h!]
+				\begin{tabular}{llll}
+				Z                       &                         & C                      &                        \\ \cline{3-4} 
+				                        & \multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{0} & \multicolumn{1}{l|}{1} \\ \cline{2-4} 
+				\multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{00} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{1} \\ \cline{2-4} 
+				\multicolumn{1}{l|}{AB} & \multicolumn{1}{l|}{01} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{}  \\ \cline{2-4} 
+				\multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{10} & \multicolumn{1}{l|}{}  & \multicolumn{1}{l|}{1} \\ \cline{2-4} 
+				\multicolumn{1}{l|}{}   & \multicolumn{1}{l|}{11} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{}  \\ \cline{2-4} 
+				\end{tabular}
+				\end{table}
+				Only one circles
+				$$Z=\overline{AB}C+\overline{AC}B+\overline{B}AC+\overline{C}AB$$
+		\subsection{Give truth table for circuits}
+			\includegraphics[width=300px]{assets/164e.png}\\
+			C1 - OR gate
+			\begin{table}[h!]
+			\begin{tabular}{|l|l|l|}
+			\hline
+			A/B & 0 & 1 \\ \hline
+			0   & 0 & 1 \\ \hline
+			1   & 1 & 1 \\ \hline
+			\end{tabular}
+			\end{table}\\
+			C2 - XOR
+			\begin{table}[h!]
+			\begin{tabular}{|l|l|l|}
+			\hline
+			A/B & 0 & 1 \\ \hline
+			0   & 0 & 1 \\ \hline
+			1   & 1 & 0 \\ \hline
+			\end{tabular}
+			\end{table}
 \end{document}
 		

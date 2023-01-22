@@ -99,17 +99,17 @@
 	\tableofcontents
 	\clearpage
 	\section{The basics}
-		Computer architecture: attrributes of a system visible to the programmer, such as instruction set architecture (ISA) which defines opcodes, registers, instruction and data memory.\\
+		Computer architecture: attributes of a system visible to the programmer, such as instruction set architecture (ISA) which defines opcodes, registers, instruction and data memory.\\
 		Computer organization: operational units and their interconnections, which are the behind the scenes of the architecture.\\
 		\subsection{Structure and Function}
 			A computer can perform 4 basic functions:
 			\begin{itemize}
 				\item Data processing - manipulate data in some form
 				\item Data storage - in every computer some form of storage is needed even if it just temporary
-				\item Data movement - data movement can be in many forms but most clear is the data movement from the input/ouput (I/O) refered to as peripheral
+				\item Data movement - data movement can be in many forms but most clear is the data movement from the input/output (I/O) referred to as peripheral
 				\item Control - a control unit which can orchestrate the performance and functional parts of the computer
 			\end{itemize}
-			 This therfore creates a computer structure of:  CPU, Main memory, I/O, System bus.\\
+			 This therefore creates a computer structure of:  CPU, Main memory, I/O, System bus.\\
 			 The CPU are here a unit consisting of:
 			 \begin{itemize}
 			 	\item Control unit - Control the operations sent to the CPU
@@ -123,11 +123,11 @@
 				\item ISU (instruction sequence unit) - controls instructions sequence and allows for an out-of-order (OOO) sequence
 				\item IFB (instruction fetch and branch) and ICM (instruction cache and merge) - These two subunits contain the 128-kB instruction cache, branch prediction logic, instruction fetching controls, and buffers.
 				\item IDU (instruction decode unit) - fed from the IFU buffer it parses and decodes architecture operation codes
-				\item LSU (load-streo unit) - contains L1 data cache and controls data flow between L1 and L2 cache
-				\item XU (translatio unit) - Translate logical addresses into physical addresses
+				\item LSU (load-store unit) - contains L1 data cache and controls data flow between L1 and L2 cache
+				\item XU (translation unit) - Translate logical addresses into physical addresses
 				\item PC (core pervasive unit) - Collects instrument data and errors
-				\item FXU (fixed-point unit) - executes fixed point arithmetic operaitons
-				\item VFU (vector and floating-point unit) - Handles all binary and hexadecimal floating point operations and fixed-point multiplication
+				\item FXU (fixed-point unit) - executes fixed point arithmetic operations
+				\item VFU (vector and floating-point unit) - Handles all binary and hexadecimal floating-point operations and fixed-point multiplication
 				\item RU (recovery unit) - Keep a copy of the complete state in case of recovery
 				\item COP (dedicated co-processor) - data compression and encryption functions for each core
 				\item L2D - data cache for memory traffic
@@ -135,78 +135,78 @@
 			\end{itemize}
 		\subsection{Gates, memory cells, Chips, and Multichip modules}
 			The only two required components for a digital computer are: gates and memory cells\\
-			A gate is a component which implments a boolean or logical function, ex AND gate.\\
-			A memory cell can be in two states at all time on or off and in this way save a bit.\\
-			A transistor is the electric based implmentation of a gate or memory cell\\
+			A gate is a component which implements a boolean or logical function, ex AND gate.\\
+			A memory cell can be in two states at all times on or off and in this way save a bit.\\
+			A transistor is the electric based implementation of a gate or memory cell\\
 		\subsection{Processor architecture}
 			The Intel x86 by the complex instruction set computers (CISCs).\\
 			Unlike ARM which is based on reduced instruction set computer (RISC).\\
 		\subsection{Embedded systems}
 			These are system which are general purpose, but system where hardware and software (embedded system (OS)) are coupled together.\\
-			Theses system is found everywhere, and often working with the external envirement via sensors.\\
+			Theses system is found everywhere, and often working with the external environment via sensors.\\
 			Due to the software only having one purpose they are more efficient in both energy and processing power.\\
-			An embedded system may use a general purpose chip but most use a dedicated processor with specific number of needed tasks.\\
-			These dedicated chips often take form in microcontrollers which are sos called computers on a chips, small chips which have the same requirements for the 4 basic functions of a computer.\\
-			Deeply embedded systems are microcontrolelrs with burnt in programs and no interactions with the user.
+			An embedded system may use a general-purpose chip, but most use a dedicated processor with specific number of needed tasks.\\
+			These dedicated chips often take form in microcontrollers which are so called computers on a chips, small chips which have the same requirements for the 4 basic functions of a computer.\\
+			Deeply embedded systems are microcontrollers with burnt in programs and no interactions with the user.
 	\section{Performance}
-		In order to achieve the processing power of today different methods are being used to keep task comming to the CPU
+		In order to achieve the processing power of today different methods are being used to keep task coming to the CPU
 		\begin{itemize}
 			\item Pipelining  - An execution of an instruction has multiple parts like: fetching instruction, decoding opcode, fetch operands and so on. Pipelining handles multiple executions by handling a different parts in every task.
 			\item Branch prediction - By looking ahead in the instruction code, a prediction of needed instructions and buffers can be fetched beforehand.
-			\item Superscalar execution - Multiple instructions are performed every processor clocl cycle.
-			\item Data flow analysis - By observing which instructions depend on other instruction result, a new order of instruction are made.
+			\item Superscalar execution - Multiple instructions are performed every processor clock cycle.
+			\item Data flow analysis - By observing which instructions depend on other instruction result, a new order of instruction is made.
 			\item Speculative execution - By using branch prediction and data flow analysis, the CPU speculates on upcoming instruction and execute them.
 		\end{itemize}
-		To create a new and faster CPU there are three aproaches:
+		To create a new and faster CPU there are three approaches:
 		\begin{itemize}
 			\item Increase speed by reducing size of the chip, and therefore reducing the travel time of information
 			\item Speed up cache size, to reduce to waiting time on slow data transformation
-			\item Change processor oragnization and architecture to allow for better parallelism
+			\item Change processor organization and architecture to allow for better parallelism
 		\end{itemize}
-		But by increasing the speed and lowering the size of transistor, it creates new problem such as: Power density becomming higher and making it harder to dessipate heat, slower electron flow due to smaller connection which creates more resistance, Memory access speed which is a common constraint for CPUs.\\
-		Therefore a more modern solution is multi core processor designs, such more cores with shared cache can archive more speed.\\
-		Amdahls law describe hwo multicore can speedup a process as followed
+		But by increasing the speed and lowering the size of transistor, it creates new problem such as: Power density becoming higher and making it harder to dissipate heat, slower electron flow due to smaller connection which creates more resistance, Memory access speed which is a common constraint for CPUs.\\
+		Therefore, a more modern solution is multi core processor designs, such more cores with shared cache can archive more speed.\\
+		Amdahls law describe how multicore can speedup a process as followed
 		$$Speedup = \frac{1}{(1-f)+\frac{f}{N}}$$
-		Where $f$ is the code which can infinitly be parallelizable and $N$ is the number of cores.\\
-		But this should be taken with a grain of salt due to in a real envirement other processes are able to make use of extra cores in case of a non parallelizable task.\\
+		Where $f$ is the code which can infinitely be parallelizable and $N$ is the number of cores.\\
+		But this should be taken with a grain of salt due to in a real environment other processes are able to make use of extra cores in case of a non-parallelizable task.\\
 		A simple way to measure required speed is Littles Law which is 
 		$$L=\lambda W$$
-		Where $L$ is the aver number of unit in the system at any time, $\lambda$ is average rate of items which arrive per unit time and $W$ is a number of unit time.
+		Where $L$ is the average number of unit in the system at any time, $\lambda$ is average rate of items which arrive per unit time and $W$ is several unit time.
 		\subsection{Measuring performance}
 			Clock speed are a way of measuring the speed of electric pulses in the CPU measured in Hz, The time between a clock tic is called cycle time.\\
-			Average cycle per instruction (CPI) is the average weighted number of cycles needed for every avaliable instruction. 
+			Average cycle per instruction (CPI) is the average weighted number of cycles needed for every available instruction. 
 			$$CPI=\frac{\sum\limits_{i=0}^n(CPI_i\cdot I_i)}{I_c}$$\\
-			Where $CPI_i$ is the number of operation for the instruction $i$ and $I_i$ is the number of the instruction. $I_c$ is the total number of operations.\\
+			Where $CPI_i$ is the number of operations for the instruction $i$ and $I_i$ is the number of the instruction. $I_c$ is the total number of operations.\\
 			With this the process time can be calculated in two ways
 			$$T=I_c\cdot CPI \cdot \tau$$
 			$$T=I_C \times [p+(m\times l)]\times \tau$$
-			$I_C$ is instruction count, $\tau=1/f$ where $f$ is clocl frequency,  $p$ number of processor cycles for decode and execute, $m$ number of memory references, $k$ ratio between memory cycle time and processor cycle time.\\
+			$I_C$ is instruction count, $\tau=1/f$ where $f$ is clock frequency,  $p$ number of processor cycles for decode and execute, $m$ number of memory references, $k$ ratio between memory cycle time and processor cycle time.\\
 			Often the millions of instruction per second (MIPS) is used which can be found with:
 			$$MIPS = \frac{f}{CPI\times 10^6}=\frac{I_c}{T\cdot 10^6}$$
 			Which also can be found in variations with floating point operations (MFLOPS)\\
 			This is a flawed measurement due to different architectures like RISC and CISC where RISC will always have an advantage due to the reduced instruction set.\\[4mm]
 			A good benchmark should be:
 			\begin{itemize}
-				\item Written in hight level language to make portability high
-				\item Is representive of a kind of programming domain
+				\item Written in high level language to make portability high
+				\item Is representative of a kind of programming domain
 				\item Easily measured
 				\item Wide distribution
 			\end{itemize}
 			SPEC is a standard for benchmarking which uses these terms:
 			\begin{itemize}
-				\item Benchmark - program written in high level and able to compile and execute on every computer which implments the compiler
+				\item Benchmark - program written in high level and able to compile and execute on every computer which implements the compiler
 				\item System under test - the tested computer system
-				\item Reference machine - the reference scores from a choosen machine to compare current result to
-				\item Base metric - strict guidelines for compilation in order to be able to comapre results
+				\item Reference machine - the reference scores from a chosen machine to compare current result to
+				\item Base metric - strict guidelines for compilation in order to be able to compare results
 				\item Peak metric - Optimized settings for the given system
-				\item Speed metic - The total time of execute a compiled benchmark
+				\item Speed metric - The total time of execute a compiled benchmark
 				\item Rate metric - the number of tasks which can be completed in a given amount of time
 			\end{itemize}
 	\section{Digital logic}
 		\subsection{Boolean algebra}
-			Boolean algebra are algebra based on only the values 1 or 0.\\
-			It consist of variables and the operations AND ($\cdot$), OR (+) and NOT ($\overline{b}$) in that precedence.\\
-			Another often usefull operators are XOR ($\oplus$), NAND ($\overline{b\cdot a}$) and NOR ($\overline{a+b}$)\\
+			Boolean algebra is algebra based on only the values 1 or 0.\\
+			It consists of variables and the operations AND ($\cdot$), OR (+) and NOT ($\overline{b}$) in that precedence.\\
+			Another often useful operators are XOR ($\oplus$), NAND ($\overline{b\cdot a}$) and NOR ($\overline{a+b}$)\\
 			Set operation may also be performed on sets of boolean, where union is or, intersect is and. When applies the operation is performed on each bit one by one.\\
 			And then the universal set will just be a set of 0's.\\
 			For more info, checkout my logical proposition repo.\\
@@ -215,8 +215,8 @@
 				\centering
 				\caption{Figure of gates and their logical operation}
 			\end{figure}
-			These gates only have two output and one output except the NOT gate, but any number of inputs is possible and some gates may have two outputs where one is negated.\\
-			When designing af circuit the fewer amount of gates the simpler and to complete possible operation the following set combinations are possible:
+			These gates only have two output and one output except the NOT gate, but any number of inputs is possible, and some gates may have two outputs where one is negated.\\
+			When designing a circuit, the fewer number of gates the simpler and to complete possible operation the following set combinations are possible:
 			\begin{itemize}
 				\item AND, OR, NOT
 				\item AND, NOT
@@ -224,21 +224,21 @@
 				\item NAND
 				\item NOR
 			\end{itemize}
-			When writing circuit, it can be done in two forms, sum of products, where product expression are multiplied, and product of sums (POS) where sum are multiplied.\\
-			Both forms may not be the most simple form, but SOP uses only NAND, NOT and OR gates and POS uses only OR, AND, and NOT.\\
+			When writing circuit, it can be done in two forms, sum of products, where product expression is multiplied, and product of sums (POS) where sum is multiplied.\\
+			Both forms may not be the simplest form, but SOP uses only NAND, NOT and OR gates and POS uses only OR, AND, and NOT.\\
 			To simplify a circuit there are different methods
 			\begin{itemize}
-				\item Algebraic simplifications - This can be done with indentities, which can simplify the expressions
+				\item Algebraic simplifications - This can be done with identities, which can simplify the expressions
 				\item Karnaugh Maps - k-maps are a method which can help simplifying which variables are the out depended upon
 			\end{itemize}
 			
 			\subsection{Karnaugh maps}
-				This method works by taking 2 to 4 variables from a truthstable or function. They are then setup in a grid such all posibilities are accounted for.\\
-				So for one side describing one variable there are 2 possibilites and a row which describes two variables there will be 4 possible outcomes.\\
-				For each row/column combination the function or truthtable are used to determine if the cell is 0 or 1.\\
-				Afterwards each 1 is circled in groups of powers of 2, so 1,2,4,8 or so on. A circle can not be cross or contain 0.\\
-				For each circle the depending non changing variables are used in an and form and may be negated if the input was a consisten 0.\\
-				For each circle the found AND expression is added with or to eachoter.
+				This method works by taking 2 to 4 variables from a truthstable or function. They are then setup in a grid such all possibilities are accounted for.\\
+				So, for one side describing one variable there are 2 possibilities and a row which describes two variables there will be 4 possible outcomes.\\
+				For each row/column combination the function or truthstable are used to determine if the cell is 0 or 1.\\
+				Afterwards each 1 is circled in groups of powers of 2, so 1,2,4,8 or so on. A circle cannot be cross or contain 0.\\
+				For each circle the depending non changing variables are used in an and form and may be negated if the input was a consistent 0.\\
+				For each circle the found AND expression is added with or to each other.
 				\begin{figure}[h!]
 					\includegraphics[width=200px]{assets/kmap.png}
 					\centering
@@ -248,10 +248,10 @@
 				This is a more suitable method for SOP which have more than 4 variables.\\
 				The method works by first creating a table with each collection of products on each row and in every column is the variables and in each cell are the needed value for the term to turn true.\\
 				The table is then ordered such the row with most 0's is at the top at the row with most 1's are at the bottom.\\
-				Then every row is compared to every row starting at the top, and if a row exist with only one column difference, the difference variable is eliminated and the rest of the variables are added to a new list.\\
-				Then every element in the list is done with same procedure, and new found objects are added to the list. Then the same step is repeated with every new element until there is no new elements.\\
-				Then every elment from the list is added to a table as rows and the original terms are added as columns.\\
-				Then an X is placed in every cell where the row product is contained in the column. Then circle every X which is alone in a column, and square every X which are in a row with a circle.\\
+				Then every row is compared to every row starting at the top, and if a row exists with only one column difference, the difference variable is eliminated, and the rest of the variables are added to a new list.\\
+				Then every element in the list is done with same procedure, and newfound objects are added to the list. Then the same step is repeated with every new element until there is no new elements.\\
+				Then every element from the list is added to a table as rows and the original terms are added as columns.\\
+				Then an X is placed in every cell where the row product is contained in the column. Then circle every X which is alone in a column and square every X which are in a row with a circle.\\
 				Those rows with a marked X are now needed for the minimal expression.
 				\begin{figure}[h!]
 					\includegraphics[width=300px]{assets/quine-McCluskey.png}
@@ -262,50 +262,50 @@
 			\subsection{Circuits}
 				\subsubsection{Multiplex}
 					Multiplex is a circuit of which a number of inputs label D0,D1,...,DN is wired to an output F.\\
-					To controle which input determine the F value, the required number of selection inputs are used called S1,S2...,SN.\\
-					So for a 4 input it would require two S inputs.\\
+					To control which input determine the F value, the required number of selection inputs are used called S1,S2...,SN.\\
+					So, for a 4 input it would require two S inputs.\\
 				\subsubsection{Decoders and encoders}
 					A decoder is a circuit with a number of output lines, with only one asserted at the time.\\
-					In general a decoder has $n$ input and $2^n$ outputs and can be usefull for writting a specific sequence of bits according to a simple code.\\
+					In general, a decoder has $n$ input and $2^n$ outputs and can be useful for writing a specific sequence of bits according to a simple code.\\
 					An encoder will then be the inverse of the decoder.
 				\subsubsection{Read-only Memory}
 					As in the name this is memory, which can only be read from and are not programmable.\\
-					This is implmented using a decoder and a set of OR gates.\\
-					This is done by the a number inputs representing the placement of data and the OR gates each give out the value at the address.
+					This is implemented using a decoder and a set of OR gates.\\
+					This is done by a number of inputs representing the placement of data and the OR gates each give out the value at the address.
 				\subsubsection{Sequential circuits}
-					Unlike combinational circuits as above a sequential circuits ouputs are depending on current inputs and the current state.\\
-					The most simple form is a flip-flop, which is able to store one bit of data.\\
+					Unlike combinational circuits as above a sequential circuits outputs are depending on current inputs and the current state.\\
+					The simplest form is a flip-flop, which can store one bit of data.\\
 					There are different types of flip flops with different properties
 					\begin{figure}[h!]
 						\includegraphics[width=300px]{assets/flipFlops.png}
 						\centering
 						\caption{Different types of flip flops}
 					\end{figure}
-					The SR flip flop can not have both S and R be 1 but is the most simple, with a on (S) and off (R)\\
+					The SR flip flop cannot have both S and R be 1 but is the simplest, with a on (S) and off (R)\\
 					The D flip flop has a single switch for both on and off\\
 					The JK flip flop can have both inputs be 1 and will simply result in Q being 0\\
-					These flips flops can then be made in parrallel forming a register, or by as a shift register which has flip flops in series and are sending data down the series at each clock cycle with only input at the front.\\
-					Another use case is a series of flip flops which creates a ripple counter or assyncronous counter, which when incrementet the effect ripples through all the other flip flops.\\
+					These flips flops can then be made in parallel forming a register, or by as a shift register which has flip flops in series and are sending data down the series at each clock cycle with only input at the front.\\
+					Another use case is a series of flip flops which creates a ripple counter or asynchronous counter, which when incremented the effect ripples through all the other flip flops.\\
 					Synchronous counters have the clock going into every flip flop. It can be observed that when counting in binary the first bit, simply flips on every count, the next bits flips when the right bit is 1.\\
 					\begin{figure}[h!]
 						\includegraphics[width=300px]{assets/counters.png}
 						\centering
-						\caption{Two implmentations of binary counters}
+						\caption{Two implementations of binary counters}
 					\end{figure}
 				\subsubsection{Programmable logic devices}
 					PLD are general-purpose chips.\\
 					There are different types of PLD
 					\begin{itemize}
 						\item PLA - Programmable logic array, is circuit which allows a number of inputs in both normal and negated form, which goes into an array of and gates, which output are wired up to an OR array into the outputs. This takes advantage of SOP binary form
-						\item FPGA - Field programmable gate array, is a circuit consisting og a logic block, which are programmable using flip flops, I/O blocks and interconnect which connects the I/O block to the internal logic blocks
+						\item FPGA - Field programmable gate array, is a circuit consisting of a logic block, which are programmable using flip flops, I/O blocks and interconnect which connects the I/O block to the internal logic blocks
 					\end{itemize}
 	\section{Instruction sets}
 		\subsection{Machine instructions}
-			A machine instruction consist of the following:
+			A machine instruction consists of the following:
 			\begin{itemize}
 				\item Operation code - the code which describe the operation to be performed called opcode
 				\item Source operand reference - The operation may one or more source reference for the operation
-				\item Result operand reference - The reference to the result of the operation if it exist
+				\item Result operand reference - The reference to the result of the operation if it exists
 				\item Next instruction reference - The reference which hold the next instruction for after the execution
 			\end{itemize}
 			The next instruction reference and result reference can reference memory in different sources:
@@ -315,10 +315,10 @@
 				\item Immediate - The reference may be contained in the current instruction
 				\item I/O device 
 			\end{itemize}
-			When referencing instruction the opcode is most often represented as abbreviation called mnemonics, such as ADD\\
+			When referencing instruction, the opcode is most often represented as abbreviation called mnemonics, such as ADD\\
 			Instructions can be of the following types
 			\begin{itemize}
-				\item Data processing - Artihmetid and logic instructions
+				\item Data processing - Arithmetic and logic instructions
 				\item Data storage - movement of data from and to registers and memory locations
 				\item Data movement - I/O instructions
 				\item Control - Test and branch instructions
@@ -326,15 +326,15 @@
 			Instructions may be designed to use 
 			\begin{itemize}
 				\item 0 references - This will then use the stack for references
-				\item 1 referenece - Performs the instruction on and saves in a common accumulator register or something alike which the instruction is used upon 
+				\item 1 reference - Performs the instruction on and saves in a common accumulator register or something alike which the instruction is used upon 
 				\item 2 references - Performs the instruction and saves it in the first register
 				\item 3 references - Performs instruction and first two references and saves in the last reference
 			\end{itemize}
 			When designing a set of instruction there are multiple questions have to be considered
 			\begin{itemize}
 				\item Operation repertoire - How many and which operations should be in the set
-				\item Data types - Which data types should be avaliable
-				\item Instruction format - Instruction lengthm number of addresses, size of varius field and so on
+				\item Data types - Which data types should be available
+				\item Instruction format - Instruction length number of addresses, size of various field and so on
 				\item Registers - Number of registers which should be referenceable and what their use should be
 				\item Addressing - In which mode an address of an operand is specified
 			\end{itemize}
@@ -342,25 +342,25 @@
 			For numbers there are 3 different types 
 			\begin{itemize}
 				\item Binary integer or binary fixed point - The classic integer in binary form
-				\item Binary flaoting point - here the first bit mean the sign(1 = negative) the nest 8 bits are the exponent and the next 23 are the mantisse for the 32 bit version
+				\item Binary floating point - here the first bit means the sign(1 = negative) the nest 8 bits are the exponent and the next 23 are the mantissa for the 32-bit version
 				\item Packed decimal - used to avoid a lot of conversion, such every decimal is represented with 4 bits, and (1101) means - and (1100) means +
 			\end{itemize}
-			For representing characters 8 binary bits can be used with standards by ASCII, whcih dictates what the different binary combination represent.\\
+			For representing characters 8 binary bits can be used with standards by ASCII, which dictates what the different binary combination represent.\\
 			The x86 can deal with data types of 8 (byte), 16 (word), 32 (doubleword), 64 (quadword), and 128 (double quadword)\\
 			ARM processors support data types of 8 (byte), 16 (halfword), and 32 (word) bits in length.\\
 		\subsection{Types of operations}
 			A useful and typical categorization is the following: 
 			\begin{itemize}
-				\item Data transfer - Calculate the memory address based on address mode, if virtual translate to real memory, detemine if data is not cached and issur a command to the memory module.
-				\item Arithmetic - Different kind of matematic operations and may include data movement for the operation
+				\item Data transfer - Calculate the memory address based on address mode, if virtual translate to real memory, determine if data is not cached and issues a command to the memory module.
+				\item Arithmetic - Different kind of mathematic operations and may include data movement for the operation
 				\item Logical - Logical operations such as XOR, right shift, left shift or rotate on binary data
-				\item Conversion - Conversion between binary and decimal aswell as operation conversion between 8 bit and such
+				\item Conversion - Conversion between binary and decimal as well as operation conversion between 8 bit and such
 				\item I/O - Instructions for data movement in and out of the system
-				\item System control - Privelege function often reserved to operation system, such as alter register control or modifying storage protection key.
+				\item System control - Privilege function often reserved to operation system, such as alter register control or modifying storage protection key.
 				\item Transfer of control - Operations for changing execution with: branching on condition (if and loops), skip on condition (skip out loop or flow), call a block of code and return to current code (function calling) is done by calling it and pushing parameters and return to stack in a stack frame. 
 			\end{itemize}
-			When using conditions it refers to one of the architectures flags, which may be raised during instructions.\\
-			For x86 the call specificly does
+			When using conditions, it refers to one of the architectures flags, which may be raised during instructions.\\
+			For x86 the call specifically does
 			\begin{itemize}
 				\item Push the return point on the stack
 				\item Push the current frame pointer on the stack
@@ -368,12 +368,12 @@
 				\item Adjust the stack pointer to allocate a frame
 			\end{itemize}
 			This can be done manually by instructions or by the ENTER instruction though it takes 10 cycles instead of 6.\\
-			MMX instructions are also exclusive to x86 and are instruction which can operate on multiple smaller data set by combining them into 32 or 64 bit chunks.\\
-			This allows the instruction to work in parrallel on things like image processing where pixels are gathered in larger chunks.\\
+			MMX instructions are also exclusive to x86 and are instruction which can operate on multiple smaller data set by combining them into 32- or 64-bit chunks.\\
+			This allows the instruction to work in parallel on things like image processing where pixels are gathered in larger chunks.\\
 	\section{Addressing modes and Formats}
-		\subsection{Adressing modes}
-			Adressing modes are different methods of getting an address which can be send to the accumilator.\\
-			Most often a system implements two modes and the selected method is either in the opcode or in the memory field.\\
+		\subsection{Addressing modes}
+			Addressing modes are different methods of getting an address which can be send to the accumulator.\\
+			Most often a system implements two modes, and the selected method is either in the opcode or in the memory field.\\
 			\begin{figure}[h!]
 				\centering
 				\includegraphics[width=300px]{assets/addressingModes.png}
@@ -384,15 +384,15 @@
 				\item Direct - The instruction contains a memory location which value is the address, memory location is limited to operand size.
 				\item Indirect - The instruction contains memory locations which contains memory location of which value is the address, first operand location is then low such it can contain a higher memory location
 				\item Register - Same as direct but the operand refers to a register instead, registers are faster in case of reuse and requires a smaller address
-				\item Register inderect - Same as indeirect but with registers
-				\item Displacement - Operants are both a register address and a value which is added to the register value to find memory location containing address.
+				\item Register indirect - Same as indirect but with registers
+				\item Displacement - Operands are both a register address and a value which is added to the register value to find memory location containing address.
 				\item Stack - Instead of instruction including a memory reference the stack is used to operate
 			\end{itemize}
 			Displacement can be used in different ways
 			\begin{itemize}
 				\item Relative - The register used is the program counter, such the memory location is relative to the current with the offset of the other operand.
 				\item Base register - Uses the base registers value added with the other operand
-				\item Indexing - Register contains offset and other operand is memory location, often used for loops, and autoindex may be enabled where it automaticly in a cycle increment.
+				\item Indexing - Register contains offset and other operand is memory location, often used for loops, and autoindex may be enabled where it automatically in a cycle increment.
 			\end{itemize}
 			 For autoindex, the new index is saved in the memory location, this is either done before preindexing or after the indirection it is postindexing.
 		\subsection{Addressing in x86}
@@ -401,10 +401,10 @@
 				\includegraphics[width=300px]{assets/addressingModesCalculation.png}
 				\caption{Addressing modes in x86 and how it is calculated}
 			\end{figure}
-			In x86 there are segment registers, these registers holds an index of the descriptor registers.\\
+			In x86 there are segment registers, these registers hold an index of the descriptor registers.\\
 			The descriptor registers hold 3 values: Access right to the data, how much data there is and where the first part of the data is located.\\
-			In addition there is a base register and index register.\\
-			For register operand mode - either a 32 bit register, 16 bit register or 8 bit reguster can be used for data tranfer, aruthmetic and logical instructions.\\
+			In addition, there is a base register and index register.\\
+			For register operand mode - either a 32-bit register, 16-bit register, or 8-bit register can be used for data transfer, arithmetic and logical instructions.\\
 			Displacement mode are not often used due to the long length up to 32 bits and are mostly used for global variables.\\
 			For the rest if the addressing modes the memory location is referenced by the segment and the offset in the segment.\\
 			Displacement mode with base is used for local variables, index of arrays and large record pointers.\\
@@ -414,37 +414,37 @@
 			Preindex and postindex are offset but with the writing to the register either pre or post indexing.\\
 		\subsection{Instruction formats}
 			The length of an instruction is determined by a lot of factors, the longer the easier to program but more space.\\
-			The length should be equal to memory-transfer or a multiple the length to ensure integral nnumber durin a fetch cycle.\\
-			The length should also be optimized to be shorter due to memory most often being a bottlenect in speed. \\
-			The instruction length should also be a multiple of 8 due to the character length, and how that relates to the word length such a word contain an integral number of characters.\\[4mm]
+			The length should be equal to memory-transfer or a multiple the length to ensure integral number during a fetch cycle.\\
+			The length should also be optimized to be shorter due to memory most often being a bottleneck in speed. \\
+			The instruction length should also be a multiple of 8 due to the character length, and how that relates to the word length such a word contains an integral number of characters.\\[4mm]
 			The allocation of bits is also determined by multiple factors\\
-			The more opcodes the more readable code and often less code, but som opcodes may be determined by the operands also.\\
-			The amount of registers also affect the amount of bits required to describe a register. The ideal amount is found to be between 8 and 32.\\
+			The more opcodes the more readable code and often less code, but some opcodes may be determined by the operands also.\\
+			The number of registers also affect the number of bits required to describe a register. The ideal amount is found to be between 8 and 32.\\
 			These registers can also be in sets such they can be determined with smaller amount of bits ex 2 sets of 8 requires 3 bits of data.\\
 			The operands also need a good amount of data for addresses, not directly addresses but rather a big range for the displacement.\\
-			Variable length instruction are variable length in the bit allocation in instruction which solves some of the many problems but requires more complexity in the processor and multiple instruction may be fetched at once.\\
+			Variable length instructions are variable length in the bit allocation in instruction which solves some of the many problems but requires more complexity in the processor and multiple instruction may be fetched at once.\\
 			\subsubsection{x86 instruction format}
 				\begin{figure}[h!]
 					\centering
 					\includegraphics[width=300px]{assets/x86instructionFormat.png}
-					\caption{x86 instruction format and it lengths}
+					\caption{x86 instruction format and its lengths}
 				\end{figure}
 				\begin{itemize}
 					\item \textbf{Prefixes}
-					\item Instruction prefixes - There are two avaliable prefixes, LOCK which ensures exclusive use of shared memory in multiprocessor envirements, and repeat prefixes which can be on of 5
+					\item Instruction prefixes - There are two available prefixes, LOCK which ensures exclusive use of shared memory in multiprocessor environments, and repeat prefixes which can be on of 5
 					\begin{itemize}
 						\item REP - repeats instruction until register CX is equal to zero
 						\item REPE/REPNE - repeats until value of ZF flag
 						\item REPZ/REPNZ - repeats until RCX, ECX or CV is equal 0
 					\end{itemize}
 					\item  Segment override - Overrides which segment register an instruction should use
-					\item Operand size - Switches between 16 or 32 bits operands
-					\item Address size - Switches between 16 or 32 bit address generation
+					\item Operand size - Switches between 16- or 32-bits operands
+					\item Address size - Switches between 16- or 32-bit address generation
 					\item \textbf{Instruction}
-					\item Opcode - 1 - 3 bytes of length may also include bits about: if data is byte- or fullsize, direction of data operation, immediate data field must be sign extended
+					\item Opcode - 1 - 3 bytes of length may also include bits about: if data is byte- or full-size, direction of data operation, immediate data field must be sign extended
 					\item ModR/M - The location of the first operand (address mode or register) and the location of the second operand (a register) if required by the instruction. Or an extra bit for the opcode (opcode extension)
-					\item SIB - If a specified address mode need more data the SIB contain: The scale field for scaled index (2 bits), index field (3 bits) for index register and base field (3 bits) for base register.
-					\item Displacement - If displacement addressing mode is used, an 8-, 16-, or 32-bit signed integer displacement is specifed
+					\item SIB - If a specified address mode needs more data the SIB contain: The scale field for scaled index (2 bits), index field (3 bits) for index register and base field (3 bits) for base register.
+					\item Displacement - If displacement addressing mode is used, an 8-, 16-, or 32-bit signed integer displacement is specified
 					\item Immediate - Provides the value of an 8-, 16-, or 32-bit operand
 				\end{itemize} 
 			\subsubsection{ARM instruction format}
@@ -454,30 +454,30 @@
 					\caption{ARM instruction formats}
 				\end{figure}
 				\begin{itemize}
-					\item Immediate constants - 8 bit constant value which can be rorated by 4 bit to create constants
+					\item Immediate constants - 8-bit constant value which can be operated by 4 bit to create constants
 					\item Thumb instruction set - A subset of instruction which have been decreased to 16 bit instead of 32 bit. This is done by
 						\begin{itemize}
-							\item Thumb instruction are unconditional, so the conditional field is not used and all arithmetic thumbs update the conditions flag, so not flag bits are needed
-							\item The limited amount of opcodes only require 2 bits and 3 bit type field
-							\item Thumb instructions only references registers r0 to r7 so only 3 bit is required
+							\item Thumb instructions are unconditional, so the conditional field is not used, and all arithmetic thumbs update the conditions flag, so not flag bits are needed
+							\item The limited number of opcodes only require 2 bits and 3-bit type field
+							\item Thumb instructions only references register r0 to r7 so only 3 bit is required
 						\end{itemize}
 					\item Thumb-2 instruction set - This is the bridge between ARM and thumb instruction which makes it possible to combine both instruction for more compact and performed code
 				\end{itemize}
 	\section{Assembly language concepts}
-		Assember - compiler for assembly to object code\\
+		Assembler - compiler for assembly to object code\\
 		Linker - Combines one or more files containing object code into a single loadable file or executable code\\
 		Loader - Copies an executable into memory for execution\\
 		Object code - Step between assembly and executable code
-		Symobilic program - A static somewhat like assembly language with static memory\\
-		Assembly uses symbolic addresses for data for non static references.\\
-		The downsides of writing in assembly instead og high level language
+		Symbolic program - A static somewhat like assembly language with static memory\\
+		Assembly uses symbolic addresses for data for non-static references.\\
+		The downsides of writing in assembly instead of high-level language
 		\begin{itemize}
 			\item development time takes much longer
 			\item Reliability and security are lower due to no compiler which can warn or throw errors of bad or unsecure code
 			\item Debugging and verifying take longer due to more code resulting in more places it can go wrong
 			\item Maintainability is low due to the often spaghetti like structure of assembly
-			\item Protability is only on same platform
-			\item HLL language have access to use intrisc functions so assembly is not required for device drivers and other system code
+			\item Probability is only on same platform
+			\item HLL language have access to use intrinsic functions so assembly is not required for device drivers and other system code
 			\item Compilers are so good now that it often harder to write better assembly than the compiler
 		\end{itemize}
 		But there are upsides
@@ -486,12 +486,12 @@
 			\item To create a compiler assembly is required
 			\item Embedded systems may not be able to have a compiler and therefore need all code in assembly
 			\item Hardware drivers and system code are often easier to program with assembly due to hll's not having access to hardware or registers or so on
-			\item Accessing instructions that are not accessible from hhl
-			\item Code size are often smaller with self written assembly
+			\item Accessing instructions that are not accessible from hll
+			\item Code size are often smaller with self-written assembly
 			\item Writing in assembly makes it possible to optimize more in speed than a compilers general optimization
 		\end{itemize}
 		\subsection{Assembly language elements}
-			An assembly statement consist of: label, mnemonic, operand and comment
+			An assembly statement consists of: label, mnemonic, operand and comment
 			\begin{itemize}
 				\item Label (Optional) - Equivalent to address used for code references
 				\item Mnemonic - Name of operand or function , symbolic name representing an opcode
@@ -507,21 +507,21 @@
 			\end{figure}
 			For immediate addressing uses an indication that the value is encoded. Examples are H for hexadecimal, B for binary and decimal has no suffix\\
 			Ex. 100B is read as a binary value\\
-			For direct addressing expressed as a dispalcement from the DS segment.\\
+			For direct addressing expressed as a displacement from the DS segment.\\
 			\subsubsection{Pseudo-instructions}
-				Pseudo instruction are not x86 machine instruction but are still placed in the instruction field.\\
+				Pseudo instructions are not x86 machine instruction but are still placed in the instruction field.\\
 				\begin{figure}
 					\includegraphics[width=200px]{assets/assemblyDirectives.png}\\
 					\includegraphics[width=400px]{assets/x86Directives.png}
-					\caption{Directives unit and letter and whtat the different pseudo instruction do}
+					\caption{Directives unit and letter and what the different pseudo instruction do}
 					\centering
 				\end{figure}
 			\subsubsection{Macro definitions}
-				Macros are a subroutine of code, and can be used multiple times like a call instruction.\\
-				The main difference is macro expansion which actually inserts the macro at every instance to get rid of overhead time of instruction switching.\\
+				Macros are a subroutine of code and can be used multiple times like a call instruction.\\
+				The main difference is macro expansion which inserts the macro at every instance to get rid of overhead time of instruction switching.\\
 				This will result in a larger code but more clean code. \\
-				Therefore a macro should only be a small bit of code.\\
-				Macros can both be defined on single lines as - \%DEFINE A(X) = 1 + 8 + X and then be referede to as - MOV AX, A(8)\\
+				Therefore, a macro should only be a small bit of code.\\
+				Macros can both be defined on single lines as - \%DEFINE A(X) = 1 + 8 + X and then be referred to as - MOV AX, A(8)\\
 				For a multiline macro \\
 				\%MACRO <NAME> <number of params>\\
 					PUSH EBP;\\
@@ -529,18 +529,18 @@
 				\%ENDMACRO\\
 		\subsection{Types of assemblers}
 			\begin{itemize}
-				\item Coss-assembler - Runs on another computer host to then be transfered to the target machine
-				\item Residen assembler - Host and target are the same
-				\item Macroassembler - Allows the user to define sequences of instructions as macros
-				\item Microassember - Used to write microprograms which define the instruction set for a microprogrammed computer
+				\item Cross-assembler - Runs on another computer host to then be transferred to the target machine
+				\item Resident assembler - Host and target are the same
+				\item Macro assembler - Allows the user to define sequences of instructions as macros
+				\item Micro assembler - Used to write microprograms which define the instruction set for a microprogrammed computer
 				\item Meta-assembler - Can handle multiple instruction sets
 				\item One-pass assembler - Produces machine code from a single pass of the assembly code
-				\item Two-pass assember - Makes two passes to produce machine code
+				\item Two-pass assembler - Makes two passes to produce machine code
 			\end{itemize}
 			Two pass works by first finding and creating a symbol table of all symbols and their given location counter (LC).\\
 			In the second pass the following is done
 			\begin{itemize}
-				\item Transte the mnemonic into binary upcode
+				\item Translate the mnemonic into binary opcode
 				\item Use opcode the analyze the instruction
 				\item Translate each operand to appropriate register or memory code
 				\item Translate immediate value to binary
@@ -550,35 +550,35 @@
 			The assembler also has a zeroth pass where it reads all macros which are defined at the top, such it can expand on first pass.\\[4mm]
 			For a one pass compiler the trouble is keeping reference while translating which is done by, when a new label is found the following is done
 			\begin{itemize}
-				\item Leaves the instruction operand field empty in the assmbled binary instruction
-				\item The symbol used as an operand is entered in the symbol table and flaged as undefined
+				\item Leaves the instruction operand field empty in the assembled binary instruction
+				\item The symbol used as an operand is entered in the symbol table and flagged as undefined
 				\item The address of the operand field is added to a list of forward references associated with the symbol table entry
 			\end{itemize}
 		\subsection{Loading and linking}
-			Linker - Finds references to other code or data and links the references between object code (non linked machine code)\\
-			A linker which produces a single module from the main module and it references to other modules is called the linage editor\\
+			Linker - Finds references to other code or data and links the references between object code (non-linked machine code)\\
+			A linker which produces a single module from the main module, and it references to other modules is called the linage editor\\
 			Load-time dynamic linking keeps all references to external modules and in run time when the external module is used it is loaded into main memory and the reference is updates.\\
-			This also makes the libraries updatable and be in files themselves, ex in windows they are in dynamical-link libaries (DLLs), but this can also lead to DLL hell where two executables expect two different version of the same DLL file.\\[4mm]
+			This also makes the libraries updatable and be in files themselves, ex in windows they are in dynamical-link libraries (DLLs), but this can also lead to DLL hell where two executables expect two different version of the same DLL file.\\[4mm]
 			Loader - loads the final machine code into main memory \\
-			There is 3 types of loading
+			There are 3 types of loading
 			\begin{itemize}
-				\item Absolute loading - Requires all modules are in the same loacation in memory, and references are absolute, this has many disadvantages with everything having to be in main memory at once and the absolute nature makes it near impossible to make correct references
+				\item Absolute loading - Requires all modules are in the same location in memory, and references are absolute, this has many disadvantages with everything having to be in main memory at once and the absolute nature makes it near impossible to make correct references
 				\item Relocatable loading - Every reference is relative to some point in the program, such that point location is just added to every other reference
 				\item Dynamic run-time loading - To ensure that the program has not been moved since first loading, the references is first calculated with the offset when the reference is needed
 			\end{itemize}
 	\section{Assembly language x86}
 		A list of every instruction can be found \href{https://www.felixcloutier.com/x86/}{here}\\
 		The structure using at\&t is mnemonic source, destination.\\
-		The registers start with \% and litteral valeus start with \$\\
+		The registers start with \% and literal values start with \$\\
 		For comments \# is used.\\
-		For 64 bit instruction, the opcode ends in q
+		For 64-bit instruction, the opcode ends in q
 		\subsection{Directives}
-			Directive are part of code to initialize data or write the code.\\
+			Directives are part of code to initialize data or write the code.\\
 			There are 3 types of sections .text, .bss and .data\\
 			.data is for storing data and .bss is for allocating data.\\
 			.text is for the code and global variables.\\
 			Other forms of directives are for storing or allocating data.\\
-			This can be done by: .space <numBytes> (Byte 8, Word 16, Doubleword 32, Quadword 64, Doulbe quadword 128)\\
+			This can be done by: .space <numBytes> (Byte 8, Word 16, Doubleword 32, Quadword 64, Double quadword 128)\\
 			Or with text and label: myString: .ascii "Hello World!"
 		\subsection{Starting the code}
 			The assembler looks for the start of the code by:\\
@@ -588,7 +588,7 @@ section .text
 _start:
 	...\end{lstlisting}
 		\subsection{Registers}[h!]
-			From the existing registers the same space is actually used.\\
+			From the existing registers the same space is used.\\
 			The different registers and their space can be seen in the figure.\\
 			In some instructions two registers may be used for wider range indicated by reg1:reg2 ex: RDX:RAX
 			\begin{figure}
@@ -597,15 +597,15 @@ _start:
 				\caption{The different registers in x86 assembly}
 			\end{figure}
 			\begin{itemize}
-				\item RAX - accumilator for arithmetic operaions
+				\item RAX - accumulator for arithmetic operations
 				\item RBX - Base, holding a pointer to data
 				\item RCX - Counter used in shift/rotate instructions and loops
 				\item RDX - Data, used in arithmetic operations and I/O operations
 				\item RSI - Source index, a pointer to data source in stream operations
-				\item RDI - Destionation index, a pointer to data destination
+				\item RDI - Destination index, a pointer to data destination
 				\item R8-R15 - New registers in 64 bit
 				\item RSP - Stack pointer, points to top of stack
-				\item RBP - Strack frame base, pointer to base of current stack frame
+				\item RBP - Stack frame base, pointer to base of current stack frame
 				\item RIP - Instruction pointer
 			\end{itemize}
 		\subsection{System calls}
@@ -622,7 +622,7 @@ _start:
 			Every system call and their ids can be found \href{https://filippo.io/linux-syscall-table/}{here}.\\
 			When every value is set the instruction 'syscall' can be called.\\[4mm]
 			
-			To end a program a exit system call is made with argument 0 symbolising the error code.\\
+			To end a program an exit system call is made with argument 0 symbolizing the error code.\\
 			\begin{lstlisting}[language={[x86masm]Assembler}]
 section .text
 	global _start
@@ -632,7 +632,7 @@ _start:
 	syscall \end{lstlisting}
 		\subsection{Jumps}
 			First the instruction cmpq <arg1> <arg2> is ran to set the flag\\
-			Then one of the follwing condiiton jumps can be made
+			Then one of the following conditions jumps can be made
 			\begin{itemize}
 				\item je: $arg1\; ==\; arg2$
 				\item jne: $arg1\; !=\; arg2$
@@ -643,7 +643,7 @@ _start:
 			\end{itemize}
 		\subsection{Stack and function calls}
 			The stack goes from higher address to lower address.\\
-			So when a new thing is pushed on the stack the RSP is decreased by 8 for each stack.\\
+			So, when a new thing is pushed on the stack the RSP is decreased by 8 for each stack.\\
 			When a function is called the stack is used in the following order to create a stack frame.
 			\begin{itemize}
 				\item Argument in reverse order
@@ -651,35 +651,35 @@ _start:
 				\item Local variables created in function
 			\end{itemize}
 			The called function is responsible for popping off the local variables and instruction pointer.\\
-			The calling function has to pop the arguments.\\
+			The calling function must pop the arguments.\\
 			For first 6 integer/pointer arguments are in registers\\
 			RDI, RSI, RDX, RCX, R8, and R9\\
 			If more arguments are needed to stack is used.\\
 			RAX is used for return value.\\
 			For saving old register values they may be pushed to stack before beginning to function call.\\
 			To call a function: call <label>\\
-			And to return back from call: ret\\
+			And to return from call: ret\\
 			\includegraphics[width=300px]{assets/stackFrameStructure.png}
 	\section{Computer Arithmetic}
 		The core of the computer is the arithmetic unit (ALU)\\
 		Representing positive or negative a fixed number a bits is used to represent the number and the right most bit is a sign bit.\\
-		This causes some drawbacks, mainly arithmetics are not as simple and checking for zero is also not as easy.\\
+		This causes some drawbacks, mainly arithmetic is not as simple and checking for zero is also not as easy.\\
 		\subsection{Sign-magnitude representation}
 			The left most bit represent the sign if 1 then it is negative if 0 then positive.\\
 			Drawbacks are bad arithmetic and hard to check for zero.
 		\subsection{Twos compliment}
 			Twos compliment counter act this by positive must the first bit be 0.\\
-			Twos compliment of size $n$ is defined such if the most significant bit is 1, $2^n$ is subtracted to make it more simple.\\
+			Twos compliment of size $n$ is defined such if the most significant bit is 1, $2^n$ is subtracted to make it simpler.\\
 			When negating twos compliment the most significant digit is flipped.\\
-			The two edge cases 0 negation and the largest number negation, here a carry has to be remembered an used.\\
+			The two edge cases 0 negation and the largest number negation, here a carry must be remembered and used.\\
 			\subsubsection{Twos compliment arithmetic}
 				Doing addition is the same as binary, but the two most significant bits are not added rather XOR'ed\\
 				For subtraction a negation is done and then an addition\\
 				The addition is therefore done by a single addition unit taking two registers, saving the result in one of them or a third register, and indicate a possible overflow in a flag.\\
 			\subsubsection{Twos compliment multiplication}
-				For multiplication $n\times m$ bits, the $n$ bits are run through for every itteration a shift right of $m$ is done. If the bit itteration in $n$ is 1, $m$ is added to the summation.
-				For multiplication of twos compliment, the multiplicand is in register $M$, multiplier in $Q$ and two extra registers are needed $A$ with start value of 0, and a single bit register we call $Q_{-1}$ to represent it being to the right of itteration of $Q$.\\
-				Then $Q$ is itterrated through and looking at both $Q_i$ and $Q_{i-1}$.\\
+				For multiplication $n\times m$ bits, the $n$ bits are run through for every iteration a shift right of $m$ is done. If the bit iteration in $n$ is 1, $m$ is added to the summation.
+				For multiplication of twos compliment, the multiplicand is in register $M$, multiplier in $Q$ and two extra registers are needed $A$ with start value of 0, and a single bit register we call $Q_{-1}$ to represent it being to the right of iteration of $Q$.\\
+				Then $Q$ is iterated through and looking at both $Q_i$ and $Q_{i-1}$.\\
 				If the two bits differ then, if $Q_{i-1}$ is 1 then $M$ is added to $A$, and if $Q_{i-0}$ is 0 then $M$ is subtracted from $A$.\\
 				If the two bits are the same, or an addition/subtraction is done, then $A$ and $Q$ is cyclic shifted to the right as one unit, and $Q_{-1}$ is what would have shifted into -1 \\
 				This is repeated $n$ times where $n$ is the length of the multiplier.\\
@@ -690,7 +690,7 @@ _start:
 					\caption{Twos compliment multiplication diagram}
 				\end{figure}
 			\subsubsection{Twos compliment division}
-				For division it differs not far, where $M$ is the divisor, $Q$ is the divident and a summation register $A$ with initial value 0.\\
+				For division it differs not far, where $M$ is the divisor, $Q$ is the dividend and a summation register $A$ with initial value 0.\\
 				First $A$ and $Q$ is cyclic shifted left as one unit\\
 				Then $M$ is subtracted to $A$.\\
 				If $A$ is larger than zero (rightmost bit is 0) then set $Q_0=1$ otherwise set $Q_0=0$ and add $M$ to $A$.\\
@@ -701,7 +701,7 @@ _start:
 					\caption{Twos compliment division diagram}
 				\end{figure}
 		\subsection{Floating-point representation}
-			For a typical 32 bit format of a floating point will be\\
+			For a typical 32-bit format of a floating point will be\\
 			1 bit for sign,\\
 			8 bits for exponent,\\
 			23 bits for mantissa\\
@@ -711,11 +711,11 @@ _start:
 			This giving the values:
 			\begin{figure}[h!]
 				\includegraphics[width=300px]{assets/floatingPointLimits.png}
-				\caption{Limits for the different floating point formats}
+				\caption{Limits for the different floating-point formats}
 				\centering
 			\end{figure}
 			It can here be seen that the density of representable numbers is lower on higher numbers.\\
-			When working with floating-point arithmetic one of the follwing may happend
+			When working with floating-point arithmetic one of the following may happen
 			\begin{itemize}
 				\item Exponent overflow
 				\item Exponent underflow ending up being reported as 0
@@ -725,7 +725,7 @@ _start:
 			\begin{itemize}
 				\item Check for zeros - Change sign if subtraction, and check if one is equal to 0 such the result can be returned
 				\item Align the significands - The lower number is shifted to the right and exponent is incremented, such the least significant bits are may lost
-				\item Add or subtract the signifands - If overflow/underflow occur the exponent is either incremented or decremented
+				\item Add or subtract the significands - If overflow/underflow occur the exponent is either incremented or decremented
 				\item Normalize the result - left shift until the left most digit is not zero and decrementing the exponent
 			\end{itemize}
 			\begin{figure}[h!]
@@ -745,8 +745,8 @@ _start:
 				\centering
 				\caption{Floating point multiplication diagram}
 			\end{figure}
-			Pretty much the same for division, but instead exponents are subtracted and significands are divided as normal integers.\\
-			Guard bits are extra zeros added to the end of the significant, such at left shift there will be less lost of significant bits.\\
+			Pretty much the same for division, but instead exponents are subtracted, and significands are divided as normal integers.\\
+			Guard bits are extra zeros added to the end of the significant, such at left shift there will be less loss of significant bits.\\
 			When the result is put into the given format rounding may be needed, there are 4 different approaches
 			\begin{itemize}
 				\item Round to nearest representable number, does require some extra statement for the exact between of two representable numbers, standard is towards even
@@ -762,24 +762,24 @@ _start:
 				\item Temporal Locality  - Recent used data which is saved in case of reuse
 				\item Spacial Locality - Data around gathered data
 			\end{itemize}
-			Temporal locality is very usefull since many studies have found that many programs tends to use a small amount of data a lot and have access to a larger amount of data.\\
-			Likewise with spacial is the probability high espacialy for code since its most linear that surrounding data is usefull in the future.
+			Temporal locality is very useful since many studies have found that many programs tend to use a small amount of data a lot and have access to a larger amount of data.\\
+			Likewise with spacial is the probability high especially for code since its most linear that surrounding data is useful in the future.
 		\subsection{Memory systems}
-			Glossery
+			Glossary
 			\begin{itemize}
 				\item Word - A unit of length depending on system intel x86 32 bit
 				\item Addressable units - The amount of addresses
 				\item Unit of transfer - Number of bits written or read to/from main memory
 				\item Sequential access - Data is stored in linear form in records which is moved around in units
-				\item Direct access - Memory is assigned to a physcial address
+				\item Direct access - Memory is assigned to a physical address
 				\item Random access -  Data is assigned to unique addressing mechanism
-				\item Associative - Type of random access memory which compares address data
-				\item Access time (latency) - Time to perforam a read or white operation
-				\item Memory cycle time - Time to reset memory in RaM
-				\item Transfer rate - the speed ofwhich data is transfered denoted $T_n=T_a+\frac{n}{R}$, $T_n=$aver time to read/write $n$ bits, $T_A$=average acces time, $n$= number of bits, $R=$ transfer rate
+				\item Associative - Type of random-access memory which compares address data
+				\item Access time (latency) - Time to perform a read or write operation
+				\item Memory cycle time - Time to reset memory in RAM
+				\item Transfer rate - the speed of which data is transferred denoted $T_n=T_a+\frac{n}{R}$, $T_n=$average time to read/write $n$ bits, $T_A$=average access time, $n$= number of bits, $R=$ transfer rate
 			\end{itemize}
 		\subsection{Multilevel Memory Hierarchy}
-			The memory hierarchy is used to distribute data such larger data capacity has slower acces time, to compensate cost.\\
+			The memory hierarchy is used to distribute data such larger data capacity has slower access time, to compensate cost.\\
 			 The hierarchy is groped as
 			 \begin{itemize}
 			 	\item Registers
@@ -792,44 +792,44 @@ _start:
 			\end{itemize}
 			on-chip cache is often implemented using SRAM and off-chip cache using eDRAM.\\
 			Cache unlike other memory is not visible to the programmer and is hardware controlled.\\
-			External nonvolatile memory is refered to as secondary,- or auxiliary memory\\
-			For implemneting a memory hiarachy the following must be supported
+			External nonvolatile memory is referred to as secondary,- or auxiliary memory\\
+			For implementing a memory hierarchy, the following must be supported
 			\begin{itemize}
 				\item Locality 
-				\item Inclusuin - Given data in one level the same data must be exist as a copy on all higher levels
+				\item Inclusion - Given data in one level the same data must be exist as a copy on all higher levels
 				\item Coherence - If data is modified all copies must also be updated
 			\end{itemize}
 	\section{Cache}
 		Cache is used for temporary storage for faster access.\\
 		When data is not present in the cache a copy is read into the cache from which the CPU read the data.\\
-		The cache consts of blocks which is the minumum size of data transfer to the cache.\\
-		The blocks is contained in lines which can hold one block.\\
-		A tag is asociated with the line for addressing purposes.\\
-		Each line also include a controle bit indicating if the data in memory has been modified.\\
-		A transfer is often lees than a line which typically is 128 bytes and a block size being 2 bytes.\\
-		Cache is split into data and instructions, since it optimizes for old reuseable data.
+		The cache consts of blocks which is the minimum size of data transfer to the cache.\\
+		The blocks are contained in lines which can hold one block.\\
+		A tag is associated with the line for addressing purposes.\\
+		Each line also includes a control bit indicating if the data in memory has been modified.\\
+		A transfer is often less than a line which typically is 128 bytes and a block size being 2 bytes.\\
+		Cache is split into data and instructions, since it optimizes for old reusable data.
 		\subsection{Elements of cache design}
-			High performance computing (HPC) deals with super computers which require a whole different approache to cache.\\
+			High performance computing (HPC) deals with super computers which require a whole different approaches to cache.\\
 			A program uses virtual addresses which is translated to physical by the memory management unit (MMU).\\
 			Cache can therefore save the virtual address or the physical.\\
-			By having the virtual a translation is not needed so it is faster, but has to flushed for every new program and bits to the virtual address for different applications.\\
-			Since there is fewer cache lines than memory block a selection and organization has be done.\\
-			The most simple is direct mapping which simply takes the main memory block modulo with the avaliable cache lines which is the address.
+			By having the virtual a translation, it is not needed so it is faster, but must flushed for every new program and bits to the virtual address for different applications.\\
+			Since there are fewer cache lines than memory block a selection and organization has been done.\\
+			The simplest is direct mapping which simply takes the main memory block modulo with the available cache lines which is the address.
 		\subsection{Types of cache misses}
 			\begin{itemize}
 				\item Compulsory Miss - Not present
 				\item Conflict Miss - Data was overwritten
-				\item Capacity Miss - The working set is larger than cache resulting in constant overwritting
+				\item Capacity Miss - The working set is larger than cache resulting in constant overwriting
 			\end{itemize}
 		\subsection{Associative mapping}
-			Associative mapping allows a physcial address to be placed in any line of cache.\\
+			Associative mapping allows a physical address to be placed in any line of cache.\\
 			This therefore requires every line the be checked for data in cache.\\
-			For the SRAM is used which is more expensive and contain less storage, but is able to in parralle in one clock cycle compare each line.\\
+			For the SRAM is used which is more expensive and contain less storage but can in parallel in one clock cycle compare each line.\\
 			If the Main memory size is $=2^k$ then $k$ is the physical memory bits.\\
 			The block Size $=2^b$ and $b$ is the block offset.\\
-			The tag bits is then P.A. bits - Block offset.
+			The tag bits are then P.A. bits - Block offset.
 		\subsection{Set Association mapping}
-			This is a medium between associativ and direct mapping.\\
+			This is a medium between associative and direct mapping.\\
 			By dividing the cache into sets which is directly mapped to memory from which the sets are associative.\\
 			Calculating in this can be done as:\\
 			Line numbers: lines\\
@@ -840,12 +840,12 @@ _start:
 			tag  = log(MM) - offset - index\\
 			This then constructs the address with the same address size as the rest of the system but in the form\\
 			Tag| Index | Offset\\
-			So the address the first bits will be the tag, the next number of bits will be the index (i.e. the set it associated with) and the last bits will be the offset in the data.
-			The index will then be at a set in which the cpu can search the the tag.
+			So, the address the first bits will be the tag, the next number of bits will be the index (i.e., the set it associated with), and the last bits will be the offset in the data.
+			The index will then be at a set in which the cpu can search the tag.
 		\subsection{Replacement algorithms}
-			Associative and set associative require a replacement algorithm for choosen which cache to be overwritten.\\
+			Associative and set associative require a replacement algorithm for choosing which cache to be overwritten.\\
 			Least recently used (LRU) keeps a list of most recently used cache, when cache is used it is moved on top.\\
-			When overwritting something the bottom is used.\\
+			When overwriting something the bottom is used.\\
 			First in first out (FIFO) keeps a list of the longest staying cache and overwrites the oldest.\\
 			Least frequently used (LFU) uses a list of counter of use and replaces the least used cache.\\
 		\subsection{Write Policy}
@@ -854,30 +854,30 @@ _start:
 			The memory has been modified.\\
 			Memory may have been overwritten by the I/O or other caches.\\
 			Write through every update in cache is updated in memory which requires a lot of memory traffic.\\
-			Write back requires every write to happen in cache, when something is updated a cache a dirty bit is set from which memory can be updated\\
+			Write back requires every write to happen in cache, when something is updated a cache, a dirty bit is set from which memory can be updated\\
 			In case of write miss there are to approaches
 			\begin{itemize}
 				\item Write allocate - The block containing the word to be written is fetched from memory to cache to then write
 				\item No write allocate - The block containing the word is written directly in memory
 			\end{itemize}
 			No write allocate is most often used with write through, but the amount of moving proves inefficient.\\
-			Write back and write allocate is most used, due writting to both cache and memory due to in a miss it will hit cache next time and setting the dirty bit for the block\\
+			Write back and write allocate is most used, due writing to both cache and memory due to in a miss it will hit cache next time and setting the dirty bit for the block\\
 			In case of multiple devices with cache a cache coherency is needed, approaches can be
 			\begin{itemize}
 				\item Bus watching with write through - Each cache controller check memory of cached data and if updated invalidates local cache
 				\item Hardware transparent - hardware is used to update modified memory in all caches
-				\item Noncachable memory - shared memory is not cachable
+				\item Noncacheable memory - shared memory is not cacheable
 			\end{itemize}
 		\subsection{Line size}
-			The larger the line size the higher chance is relevant adjesant data is fetched.\\
-			But larger lines overwrittes old cache and less blocks can be in cache at once.\\
-			For larger lines the adjesant words becomes less likely to be used.\\
-			An optimum is found of 8 ti 64 bytes.
+			The larger the line size the higher chance is relevant adjacent data is fetched.\\
+			But larger lines overwrite old cache and less blocks can be in cache at once.\\
+			For larger lines the adjacent words become less likely to be used.\\
+			An optimum is found of 8 to 64 bytes.
 		\subsection{Inclusion policy}
-			Inclusive policy dictates that data in one cache is guarenteed to be in all lower levels of cache. \\
+			Inclusive policy dictates that data in one cache is guaranteed to be in all lower levels of cache. \\
 			This simplifies searching since the can be done in smallest fastest caches first and moving up.\\
 			Exclusive policy dictates that cache is guaranteed to not be in lower levels of cache, this is done to not waste space but requires more intense searching.\\
-			Noninclusive policy dictates that nothign is guarteed about placement of cache. 
+			Non inclusive policy dictates that nothing is guaranteed about placement of cache. 
 		\subsection{Cache timing models}
 			$t_{ct}=$ compare time of tag address and tag value in cache\\
 			$t_{rl}=$time to read a line from cache to retrieve data block in cache\\
@@ -888,14 +888,14 @@ _start:
 			$t_{hit}=t_{rl}+t_{xb}$\\
 			$t_{miss}=t_{rl}+t_{et}$\\
 			\textbf{Associative set cache}\\
-			$t_{hit}=t_{rl}+t_{xb}+(1-F_p)t_{et}$ where $F_p$ is the fraction of time that the way preduction succeeds\\
+			$t_{hit}=t_{rl}+t_{xb}+(1-F_p)t_{et}$ where $F_p$ is the fraction of time that the way prediction succeeds\\
 			$t_{miss}=t_{rl}+t_{et}$\\
 			For the associate cache it is the same as set but $t_{miss}=t_{rl}+t_{et}$
 		\subsection{Performance modeling of multilevel memory hierarchy}
-			For finding the average time to acces an item it can be expressed as:
+			For finding the average time to access an item it can be expressed as:
 			$$T_s=H\cdot T_1+(1-H)\times (T_1+T_2)$$
 			$$T_s=T_1+(1-H)\cdot T_2$$
-			$T_1=$ Acces time of fastest memory\\
+			$T_1=$ Access time of fastest memory\\
 			$T_2=$ Access time to second level of memory\\
 			$H=$ hit ratio\\
 			$$\frac{T_1}{T_s}=\frac{1}{1+(1-H)\frac{T_2}{T_1)}}$$\\
@@ -903,26 +903,26 @@ _start:
 			
 	\section{Internal Memory}
 		\subsection{Semiconductor main memory}
-			When talking about memory it is refered to as RAM (Random Access Memory)
-			RAM comes in two types DRAM and SRAM\\
-			DRAM (Dynamic) uses capacitors to store charge, the charge can then be interpretted as 1 if charge is above a threshold.\\
+			When talking about memory it is referred to as RAM (Random Access Memory)
+			RAM comes in two types of DRAM and SRAM\\
+			DRAM (Dynamic) uses capacitors to store charge, the charge can then be interpreted as 1 if charge is above a threshold.\\
 			The memory cell uses a transistor such two lines comes in a bit line and address line, the address line starts the circuit, if bit line is off it can be charged by the capacitor,\\
 			If the bit line is one the capacitor will be charged.\\
-			The dynamic name comes from the need to recharge due to the slow lost of charge in the capacitors.\\
+			The dynamic name comes from the need to recharge due to the slow loss of charge in the capacitors.\\
 			SRAM (Static) uses flip flops to store memory and therefore is digital instead of analog\\
 			DRAM is cheaper but SRAM is faster and therefore used for cache memory.\\
-			ROM (Read Only Memory) has to advantage of being hard coded such it is nonvolatile and fast.\\
+			ROM (Read Only Memory) must advantage of being hard coded such it is nonvolatile and fast.\\
 			PROM is the programmable version but more expensive.\\
 			Read Most Memory is for memory which is most read version of this includes
 			\begin{itemize}
 				\item EPROM - Erasable Programmable Read Only Memory is a programmable ROM which can be deleted using UV lighting
-				\item EEPROM - Electrical EPROM can be erased with electricity insetead of UV and is faster
-				\item Flash memory - Is the fastest EPROM and provides erasabillity down to chunks but not bytes and has high density
+				\item EEPROM - Electrical EPROM can be erased with electricity instead of UV and is faster
+				\item Flash memory - Is the fastest EPROM and provides eraseabillity down to chunks but not bytes and has high density
 			\end{itemize}
 			The architecture of the memory cell is controlled by a chip.\\
-			The architecture decissions may include how big chunks the memory cell should be ex 8 Mbit chip organized in 1M x 8 memory cells.\\
+			The architecture decisions may include how big chunks the memory cell should be ex 8 Mbit chip organized in 1M x 8 memory cells.\\
 			This chips uses a multiplexer to convert the numbering of the cell into an electrical signal to the cell.\\
-			The chip then has input to wether a read or write should be performed and the output.\\
+			The chip then has input to whether a read or write should be performed and the output.\\
 			The architecture can therefore also chain multiple chips together for larger amount of memory but keeping clustered memory cells.\\
 			eDRAM is memory between the memory and chip often named L4 cache.
 			\subsubsection{Error correction}
@@ -930,26 +930,26 @@ _start:
 				These are extra bits used to ensure the stored bits are correct.\\
 				When writing or reading to memory, is the memory inserted into a function. This function generates check bits in a given way.\\
 				When reading the checkbits and the memory is gathered, the memory is once again inserted into the function and the new checkbits is XOR'ed with the old creating the syndrome.\\
-				If an error have occoured to syndroms value will be equal to the bit which needs to be flipped.\\
+				If an error has occurred to the syndrome value, will it be equal to the bit which needs to be flipped.\\
 				This is an example of single-error-correcting (SEC) code.\\
-				Most often does semiconductor have both SEC and double-error-correction code which requirest a bit more.\\
+				Most often does semiconductor have both SEC and double-error-correction code which requires a bit more.\\
 			\subsubsection{Synchronous DRAM}
 				Normal DRAM when getting request for data will the CPU have to check up if it has been delivered.\\
-				Using synchronous the CPU can instruct on which next cycle the memory should be avaliable.\\
-				SDRAM also makes use of multiple bank (set of chips) to perform parrallel data management.\\
-				SDRAM also allows certain length of burst of data to be written into the bus. Therefore making SDRAM fast at larger chunks of data.\\
+				Using synchronous the CPU can instruct on which next cycle the memory should be available.\\
+				SDRAM also makes use of multiple bank (set of chips) to perform parallel data management.\\
+				SDRAM also allows certain length of burst of data to be written into the bus. Therefore, making SDRAM fast at larger chunks of data.\\
 			\subsubsection{DDR DRAM}
 				DDR (Double Data Rate) is a spin on the SDRAM such data is gathered both on up and down clock cycles.\\
 				DDR also uses a higher clock rate for the BUS to increase transfer rate.\\
 				DDR also have a prefetch buffer on the chip, the memory buffer can get both buffer and memory on 1 cycle therefore making it possible for the BUS having the double clock rate.\\
 	\section{External Memory}
 		\subsection{Magnetic Disk}
-			Magnetic disk consist of a recording medium.\\
-			This medium is read by a the head consisting of magnetoresistive (MR) sensor or written to by a magnetic coil.\\
-			The medium is split up into tracks at different radius and these teacks contain sectors at variable length.\\
+			Magnetic disks consist of a recording medium.\\
+			This medium is read by the head consisting of magnetoresistive (MR) sensor or written to by a magnetic coil.\\
+			The medium is split up into tracks at different radius and these tracks contain sectors at variable length.\\
 			To compensate for different speed at the inner track and outside track the bits are written with different intervals, this therefore result in the outer track stores the same data size the same as inner track.\\
-			Therefore making the density the limit of data.\\
-			Multizone recording is a way to divide tracks into zones which have roughtly the same data density. This allows the data density to be higher the outer the tracks is..\\
+			Therefore, making the density the limit of data.\\
+			Multizone recording is a way to divide tracks into zones which have roughly the same data density. This allows the data density to be higher than the outer the tracks are.\\
 			A sector of data contains
 			\begin{itemize}
 				\item Gap 
@@ -960,18 +960,18 @@ _start:
 			\end{itemize}
 			The format is in two ways the old 512 bytes where 50 is ECC and 15 is GAP, SYNC and Address mark.\\
 			The new format is 4k bytes, 100 ECC and 15 GAP, SYNC and Address mark.\\
-			Different types of mangetic disk
+			Different types of magnetic disk
 			\begin{itemize}
 				\item Fixed head disk - A head for each track
-				\item Movable head disk - Head moves inbetween tracks
-				\item Nonremovable - Stationary disk unline portable versions
+				\item Movable head disk - Head moves in between tracks
+				\item Nonremovable - Stationary disk unlike portable versions
 				\item Double sided - Magnetic coding on both sides of the medium
 				\item Multiple platters - Stacked mediums and reader for more data
 				\item Types of head
 				\begin{itemize}
 					\item Air gap - Where air is present between reader and medium
 					\item No gap - The medium is more robust and allows reader to be on medium
-					\item Winchester - A foil rest on the medium when still and in spin the air pressur lift the foil
+					\item Winchester - A foil rest on the medium when still and in spin the air pressure lifts the foil
 				\end{itemize}
 			\end{itemize}
 			\subsubsection{Performance}
@@ -983,29 +983,29 @@ _start:
 				$r$ - Rotation speed in RPS
 				$t_T$ - transfer time from memory to BUS\\
 				$t_T=\frac{b}{rN}$\\
-				$b$ - Number of bytes transfered
+				$b$ - Number of bytes transferred
 				$N$ - Number of bytes on track
-				Rotational positional sensing (RPS) is a server feature which tries to gain IO access when the data is about to read, if not avaliable it will take a rotation and try again.\\
+				Rotational positional sensing (RPS) is a server feature which tries to gain IO access when the data is about to read, if not available it will take a rotation and try again.\\
 		\subsection{RAID}
-			Redundant Array of Independent Disks comes in seben level 0 - 6\\
+			Redundant Array of Independent Disks comes in seven level 0 - 6\\
 			RAID uses a set of physical drives and creates logical drive.\\
 			The data is then distributed across the devices called stripping.\\
 			RAID also provides redundancy method for drive failure in some levels.\\
-			The RAID then also give the ability of faster data trasnfer through multiple IO's\\
+			The RAID then also gives the ability of faster data transfer through multiple IO's\\
 			\begin{enumerate}
  				\setcounter{enumi}{-1}
- 				\item Level - The data is striped out on all disk without any redundancy. The data is striped such continous data is spread out as much, such a single chunk can be split up into every drive.
- 				\item Level - The data has a full dublicate, makes it two times the speed to get data, relative fast write since it depends only on slow drive, easy backup, lots of required capacity
- 				\item Level - The data is striped down to byte level, gives fast read and error correction and uses hamming code for parity, require log x extra disk where x is number is disk.
- 				\item Level - The data is striped down to bytes, parity is on a single drive where pairty bit of the same strip place, fast read due to byte level strip
- 				\item Level - The data is striped in larger chunks, parity is depends on strips therefore making write time slower, for high I/O request fast but not big transfer
+ 				\item Level - The data is striped out on all disk without any redundancy. The data is striped such continuous data is spread out as much, such a single chunk can be split up into every drive.
+ 				\item Level - The data has a full duplicate, makes it two times the speed to get data, relative fast write since it depends only on slow drive, easy backup, lots of required capacity
+ 				\item Level - The data is stripped down to byte level, gives fast read and error correction and uses hamming code for parity, require log x extra disk where x is number is disk.
+ 				\item Level - The data is stripped down to bytes, parity is on a single drive where parity bit of the same strip place, fast read due to byte level strip
+ 				\item Level - The data is striped in larger chunks, parity is depending on strips therefore making write time slower, for high I/O request fast but not big transfer
  				\item Level - Like level 4 but larger strip to prevent I/O bottle neck in RAID 4
- 				\item Level - Like Level 5 but another disk is also used with another pairty method such two drives can fail
+ 				\item Level - Like Level 5 but another disk is also used with another parity method such two drives can fail
 			\end{enumerate}
 			\subsubsection{Hamming code}
 				Hamming code works by every $2^n$ bit is a parity bit and everything else is data bit.\\
 				The parity bit works by being 1 if a selection of data bit is odd and 0 if even.\\
-				Comes in different formats where for the 7 bit version is\\
+				Comes in different formats where for the 7-bit version is\\
 				p1,p2,d1,p3,d2,d3,d4\\
 				Where \\
 				p1 = d1,d2,d4\\
@@ -1022,7 +1022,7 @@ _start:
 				\item Lower power consumption
 				\item Lower access time and latency rate
 			\end{itemize}
-			The SSD also contain beside the flash
+			The SSD also contains beside the flash
 			\begin{itemize}
 				\item Controller for interface and firmware execution
 				\item Addressing 
@@ -1034,7 +1034,7 @@ _start:
 		\subsection{Optical memory}
 			CDs and CD-ROMs are optical disk used for storing data.\\
 			With techniques like the HDD but with optical lasers.\\
-			Uses variable rotation speed, with a laster at a constant linear velocity.\\
+			Uses variable rotation speed, with a laser at a constant linear velocity.\\
 			The optical disk is engraved such at flat level represent 0 and changes in level represent 1.\\
 			The data is split into block of
 			\begin{itemize}
@@ -1044,13 +1044,13 @@ _start:
 				\item Auxiliary - either extra data or error correction according to header
 			\end{itemize}
 			It has the advantage of cheap mass production and ability of storage of data and saving of data as backup.\\
-			CD-Recordable (CD-R) is a CD with a consumer friendly write \\
+			CD-Recordable (CD-R) is a CD with a consumer-friendly write \\
 			CD-Rewriteable (CD-RW) can be written to multiple times using a phase changeable crystal, with a limited amount of erase cycles\\
 			Digital Versatile Disk (DVD) is a more compact solution to CDs with capacity up to 4.7 GB\\
-			Blueray used like DVD a finer laser resulting in more density up to 25 GB.
+			Blue ray used like DVD a finer laser resulting in more density up to 25 GB.
 	\section{C programming language}
-		C is a performance constrained language which focuse on minimzing runtime overhed.\\
-		It is in direct controle of memory and compiles to native code.\\
+		C is a performance constrained language which focuses on minimizing runtime overhead.\\
+		It is in direct control of memory and compiles to native code.\\
 		Was designed for implementing UNIX\\
 		C has no support for
 		\begin{itemize}
@@ -1061,26 +1061,26 @@ _start:
 			\item Garbage collection
 			\item Limited type safety
 		\end{itemize}
-		To combat no run time error sanitizers are used. These run efore compilling checking for essentially run time errors.\\
+		To combat no run time error sanitizers are used. These run before compiling checking for essentially run time errors.\\
 		Compiling C is done using gcc, this can be to object files using -c or directly to executable\\
 		To get warnings -Wall and for more warning -Wextra.\\
 		For debug -g is used.\\
-		So a good compile command should be:\\
+		So, a good compile command should be:\\
 		gcc -Wall -Wextra -g -fsanitize=address -fsanitize=leak -fsanitize=undefined\\
 		Valgrind is an alternative to sanitizers which runs the program in a virtual a machine using:\\
-		valgrind -leak-chek=fall -track-origins=yes ./myProg arg1 arg2\\
+		valgrind -leak-check=fall -track-origins=yes ./myProg arg1 arg2\\
 		The C program uses a main in the form int main(int argc, char **argv) or with just void.\\
-		An ampty parameter means the function takes any number of parameters.\\
-		Lines starting with \# is used for preproccesing such as inclusions or macros\\
+		An empty parameter means the function takes any number of parameters.\\
+		Lines starting with \# is used for preprocessing such as inclusions or macros\\
 		Macros simply takes blindly and copies the macro into the wanted places.\\
 		Macros are made as: \#define PI 3.14 and undefined by \#undef PI\\
-		Preprocessing can also use condictions like \#ifdef DEBUG where -DEBUG is an argument to gcc\\
+		Preprocessing can also use conditions like \#ifdef DEBUG where -DEBUG is an argument to gcc\\
 		For negative variables signed versions is used\\
 		\includegraphics[width=300px]{assets/cDataSize.png}\\
 		For error handling goto are often used as exceptions.\\
 		Arrays are initialed by: int arr[10] = \{1,2,3\} where the rest is just zeros.\\
 		Pointers are made by: *p = \&i where i may be i = 42\\
-		Using **p = \&p wil then be the pointer to the value of i ie 42\\
+		Using **p = \&p will then be the pointer to the value of i i.e., 42\\
 		Additions to pointers is allowed and good use for array pointers.\\
 		Strings are made by char str[] = "Hello"
 		\subsection{IO}
@@ -1091,47 +1091,47 @@ _start:
 			\includegraphics[width=300px]{assets/printFormatters.jpg}
 		\subsection{Memory allocation}
 			Effective type is the type which the object relies on.\\
-			malloc is used for allocation space, with no effective type until wirtten, and returns a pointer to start of allocated space.\\
+			malloc is used for allocation space, with no effective type until written, and returns a pointer to start of allocated space.\\
 			sizeof returns the size of an object type, ex sizeof(int)\\
 			free function free up the space after use and takes a pointer to the space which the free up.\\
 			calloc allocates space and fille with zeros\\
 			realloc is reallocating memory from one place to new place. The old pointer should never be used.\\
 	\section{I/O}
 		I/O modules contains logic for communicating between peripherals and system bus.\\
-		The module is reqired handling peripherials data format and mismatch between data transfer rate of processor and peripherals\\
-		Peripherals is split up into three categories: Human readable, machine readeable, and communication for remote devices.\\
+		The module is required handling peripherals data format and mismatch between data transfer rate of processor and peripherals\\
+		Peripherals is split up into three categories: Human readable, machine readable, and communication for remote devices.\\
 		Control logic associated with the I/O module controls peripherals in response to direction from IO module.\\
 		Transducer convert electrical signal to digital input, often with a buffer most often 8 to 16 bits or larger if block oriented.\\
-		The functions of the IO modules comes in categories
+		The functions of the IO modules come in categories
 		\begin{itemize}
-			\item Control and timing - coordinate flow of traffic between internal and external ressources
+			\item Control and timing - coordinate flow of traffic between internal and external resources
 			\item Processor communication - Command decoding from processor to peripherals, data transfer between bus and peripherals, status reporting of devices, address recognition of peripherals
 			\item Device communication - Commands, status information and data
 			\item Data buffering - buffer data in case of different speeds
-			\item Error detection - Error detection of mechinal and electrical malfunctions and error detection code
+			\item Error detection - Error detection of mechanical and electrical malfunctions and error detection code
 		\end{itemize}
 		Three techniques are possible for I/O operations
 		\begin{itemize}
 			\item Programmed I/O - The program gets full control of IO, the processor must wait for next execution with IO and check when status is open for when finished
 			\item Interrupt-driven I/O - Uses programmed I/O but interrupts the processor when done, such it can handle the data
-			\item Direct memory access (DMA) - Uses interrupt driven IO but is able to transfer data to main memory itself
+			\item Direct memory access (DMA) - Uses interrupt driven IO but can transfer data to main memory itself
 		\end{itemize}
-		\subsection{Programemd I/O}
+		\subsection{Programmed I/O}
 			IO commands consist of which IO module, which peripheral and what command.\\
-			The commands is classified as
+			The commands are classified as
 			\begin{itemize}
 				\item Control - activate peripheral and issue a command
 				\item Test - Test condition of IO module and peripherals
 				\item Read - Obtain data from peripheral and place in internal buffer
 				\item Write - Take data from system bus and transmit to peripheral
 			\end{itemize}
-			For addressing a peripheral there are two ways, memory-mapped I/O uses a single address space for memory location and IO devices, such peripherals is treated as memory locations.\\
-			The other is isolated I/O uses a single read  line and single write line on bus, such it specifies wether a memory location or peripheral is being addressed. 
+			For addressing a peripheral there are two ways, memory mapped I/O uses a single address space for memory location and IO devices, such peripherals are treated as memory locations.\\
+			The other is isolated I/O uses a single read  line and single write line on bus, such it specifies whether a memory location or peripheral is being addressed. 
 		\subsection{Interrupt-driven I/O}
 			The main idea is the IO module will interrupt the processor once done\\
-			When the IO module completes an operation the follwoing steps is done.
+			When the IO module completes an operation, the following steps is done.
 			\begin{enumerate}
-				\item I/O device issue interrupt singal to processor
+				\item I/O device issue interrupt signal to processor
 				\item Processor finishes what currently is going on and responds
 				\item Processor test for interrupt to find module and issue an acknowledgement signal to remove interrupt signal
 				\item Prepare to work with IO module by saving next instruction in the program status word (PSW), and registers onto the system control stack
@@ -1140,17 +1140,17 @@ _start:
 				\item Registers and PSW instruction is retrieved
 			\end{enumerate}
 			For the processor to find the IO module which raised an interrupt there are different design approaches\\
-			Multiple interupt lines between processor and IO modules, but is impractical to dedicate multiple bus lines.\\
+			Multiple interrupt lines between processor and IO modules but is impractical to dedicate multiple bus lines.\\
 			Software poll essentially ask every module until it find the correct one, but it is slow.\\
 			Daisy chain is hardware poll which chain every IO module and an ack is sent to all, from which it will be answered by the correct one, from which it can be identified called a vector.\\
 			Bus arbitration also use vectored interrupts as in daisy chain which uses the bus to place the vector.\\
 		\subsection{Direct Memory Access}
 			The problem with Interrupt and programmed IO is the limited speed of which the processor can check for interrupt and the processor being tied up on IO transfers.\\
-			The DMA module is a moduel which connects to the IO and handles IO processes.\\
-			The DMA then only uses the bus when data has to be transfered and then steals cycles from the processor to use the system bus.\\
-			The DMA is commanded by sending a read or write controle line, the address of the wanted IO device, starting point of read / write, and the amount to write / read.\\
-			The DMA module is then able to handle memory and IO directly without the processor, and once done sends an interupt signal to the processor.\\
-			The DMA module can be connected to IO via the system bus, the IO can be connected directly to the DMA module or the IO is on a bus between the DMA and other IOs.\\
+			The DMA module is a module which connects to the IO and handles IO processes.\\
+			The DMA then only uses the bus when data must be transferred and then steals cycles from the processor to use the system bus.\\
+			The DMA is commanded by sending a read or write control line, the address of the wanted IO device, starting point of read / write, and the amount to write / read.\\
+			The DMA module is then able to handle memory and IO directly without the processor, and once done sends an interrupt signal to the processor.\\
+			The DMA module can be connected to IO via the system bus, the IO can be connected directly to the DMA module, or the IO is on a bus between the DMA and other IOs.\\
 		\subsection{Direct cache access}
 			Problem with DMA is it is too slow for some speeds today.\\
 			DCA uses the last level cache of the processor instead of main memory.\\
@@ -1159,32 +1159,32 @@ _start:
 		\subsection{I/O channels and processors}
 			An IO channel is an extension to DMA which make it able to itself execute IO instruction, such the CPU does not do any IO processing.\\
 			Instruction is stored in main memory and executed by a special purpose processor for the IO channel.\\
-			The instruction then include the needed infromation to perform the IO action.\\
+			The instruction then includes the needed information to perform the IO action.\\
 			There are two common types of IO channels.\\
-			Selector channel controls multiple high-speed deivces at one at a time. \\
+			Selector channel controls multiple high-speed devices at one at a time. \\
 			A multiplexor channel works with a larger set of device at the same time with slower data throughput but can chain reads from different devices.
 	\section{Link layer}
 		\subsection{ARP}
-			Address Resolution protocol is a protocole for getting MAC addresses of local devices.\\
+			Address Resolution protocol is a protocol for getting MAC addresses of local devices.\\
 			In case of LAN connected through a router the router will include an ARP module and an adapter\\
-			The rotuer is then capeable to both forward ARP messages and share it own ARP map of MAC addresses.\\
+			The router is then capable to both forward ARP messages and share its own ARP map of MAC addresses.\\
 		\subsection{Ethernet}
 			Ethernet was a standard which dominated the LAN setups using a hub which forward not packets but rather bits into all connected devices.\\
-			This was hib based star topology and the problem is collision may occour in case of sending while forwarding.\\
-			The switch therefore replaced the hub where collision would not occour.\\
+			This was hub-based star topology, and the problem is collision may occur in case of sending while forwarding.\\
+			The switch therefore replaced the hub where collision would not occur.\\
 			The ethernet frame consist of\\
 			\begin{itemize}
-				\item Data field - 46 bytres to 1500 bytes- carreis the ip datagram
-				\item Destion address - 6 bytes - MAC address of destionation
+				\item Data field - 46 bytes to 1500 bytes- carries the ip datagram
+				\item Destination address - 6 bytes - MAC address of destination
 				\item Source address - 6 bytes- MAC address of source
 				\item Type field - 2 bytes - type of payload in data field may not be IP datagram
-				\item Cyclic redundancy chech (CRC) - 4 bytes
-				\item Preamble - 8 bytes - 7 repeates of 10101010 and then 10101011 used to syncronise timing in case of not perfect target rate of a router
+				\item Cyclic redundancy check (CRC) - 4 bytes
+				\item Preamble - 8 bytes - 7 repeats of 10101010 and then 10101011 used to synchronize timing in case of not perfect target rate of a router
 			\end{itemize}
 			In case of error from error check the package is dropped with no alert.\\
 	\section{Processor Structure and Function}
 		\subsection{Processor Organization}
-			A processor is requried to
+			A processor is required to
 			\begin{itemize}
 				\item Fetch instruction - read instruction
 				\item Interpret instruction - instruction is decoded
@@ -1192,13 +1192,13 @@ _start:
 				\item Process data - Arithmetic or logical operation on data
 				\item Write data - write result from instruction
 			\end{itemize}
-			Moreover does it need memory for last and next instruction and temporary storage for execution.\\
-			The processors major compoenents are
+			Moreover, does it need memory for last and next instruction and temporary storage for execution.\\
+			The processors major components are
 			\begin{itemize}
-				\item Artihmetic and logic unit (ALU) - computation
+				\item Arithmetic and logic unit (ALU) - computation
 				\item Control unit (CU) - data movement
 				\item Registers
-				\item Internal procssor bus - transfer of data between ALU and registers
+				\item Internal processor bus - transfer of data between ALU and registers
 			\end{itemize}
 		\subsection{Register organization}
 			Registers perform two roles\\
@@ -1216,33 +1216,33 @@ _start:
 				\end{itemize}
 				\item Condition codes - written to by hardware visible by user, indicates things like overflow
 			\end{itemize}
-			The most essential registers for operation is
+			The most essential register for operation is
 			\begin{itemize}
 				\item Program counter (PC) - instruction to be fetched
 				\item Instruction register (IR) - most resent instruction
 				\item Memory address register (MAR) - address of a location in memory
 				\item Memory buffer register (MBR) - word of data to be written to memory
 			\end{itemize}
-			Bus connect directly to MAR and MBR.\\
+			Bus connects directly to MAR and MBR.\\
 			The ALU is directly connected to MBR may be through a buffer\\
 			The program status word (PSW) contains status information with common field as
 			\begin{itemize}
 				\item Sign - sign of result of recent execution
 				\item Zero - if result is 0
-				\item Carry - if operation resultet in carry
-				\item Equal - if test resultet in equal
-				\item Overflow - if arithmetic resultet in overflow
+				\item Carry - if operation resulted in carry
+				\item Equal - if test results in equal
+				\item Overflow - if arithmetic resulted in overflow
 				\item Interrupt - If interrupts are enabled or disabled
 				\item Supervisor - If the process is in privileged mode
 			\end{itemize}
 		\subsection{Instruction Cycle}
-			In general terms the the instruction cycle goes as:
+			In general terms the instruction cycle goes as:
 			Fetch - instruction read from memory at place PC with MAR onto the bus\\
-			Controle unit request read data into IR and PC is incremented by 1 for next fetch.\\
-			The controle unit check if IR is using indirect addressing if so moves it into MBR and request a memory read.\\
+			Control unit request read data into IR and PC is incremented by 1 for next fetch.\\
+			The control unit check if IR is using indirect addressing if so, moves it into MBR and request a memory read.\\
 		\subsection{Instruction Pipelining}
-			Instruction pipelining is the idea of runnign instruction as a set of operations, such instruction can be ran semi parralel such a operation is always occupied.\\
-			The most simple pipeline is fetch stage and execution stage, where when the execution takes place the fetch can get the next instruction ready called fetch overlap.\\
+			Instruction pipelining is the idea of running instruction as a set of operations, such instruction can be running semi parallel such an operation is always occupied.\\
+			The simplest pipeline is fetch stage and execution stage, where when the execution takes place, the fetch can get the next instruction ready called fetch overlap.\\
 			A latch is then used in between the stages to forward data at clock cycles.\\
 			A problem is execution is slower than fetching therefore the process can be subdivided further
 			\begin{itemize}
@@ -1255,19 +1255,19 @@ _start:
 			\end{itemize}
 			In this way the duration is close the equal.\\
 			Conflict may occur if Co stage depends on data written by previous instruction, or likewise data conflicts known as pipeline bubble.\\
-			There are three types of harzards
+			There are three types of hazards
 			\begin{itemize}	
-				\item Resource hazards - Two or more instructions need the same resource also known as structual hazard
-				\item Data hazards - Conflic in the access of an operand location, which is furhter divided into three types
+				\item Resource hazards - Two or more instructions need the same resource also known as structural hazard
+				\item Data hazards - Conflict in the access of an operand location, which is further divided into three types
 				\begin{itemize}
-					\item Read after write (RAW) or true depency - read takes place before the write operation is complate avoided by reassigning or renaming registers
-					\item Write after read (WAR) or antidependency - write is performed before read operation takes place
+					\item Read after write (RAW) or true dependency - read takes place before the write operation is complete avoided by reassigning or renaming registers
+					\item Write after read (WAR) or anti dependency - write is performed before read operation takes place
 					\item Write after write (WAW) - Two instruction both write to same register
 				\end{itemize}
-				\item Control hazards - Wrong prediction of branching therefore fetch have to be discarded
+				\item Control hazards - Wrong prediction of branching therefore fetch must be discarded
 			\end{itemize}
 			
-			The process is not further subdivided due to overhead time in moving data and the amount and complexity of controle logic.\\
+			The process is not further subdivided due to overhead time in moving data and the amount and complexity of control logic.\\
 			\subsubsection{Performance}
 				The cycle time of an instruction pipeline is determined by
 				$$\tau = \max_i(\tau_i)+d$$
@@ -1279,103 +1279,103 @@ _start:
 				$d=$ time delay of a latch, most often equal clock pulse\\
 				The total time required for a pipeline with $k$ stages and $n$ instruction will be 
 				$$T_{k,n}=[k+(n-1)]\tau$$
-				The tiem benefit of more stages can be descriped as
+				The time benefit of more stages can be described as
 				$$S_k=\frac{T_{1,n}}{T_{k,n}}=\frac{nk\tau}{[k+(n-1)]\tau}=\frac{nk}{k+(n-1)}$$
 			\subsubsection{Branch prediction}
-				Another problem is branches where the instruction can not be fetched before execution.\\
+				Another problem is branches where the instruction cannot be fetched before execution.\\
 				For this there is different prediction techniques\\
 				\begin{itemize}
 					\item Multiple streams - Create fetch stream for both branch and normal execution
-					\item Prefectch branch target - Fetch both branch and normal execution
+					\item Prefetch branch target - Fetch both branch and normal execution
 					\item Loop buffer - A buffer containing the next sequential addresses, and is checked to see if branch is already in fetched buffer, ideal for loops and if else if else statements
 					\item Branch prediction - different techniques for guessing what execution will be taken
 					\begin{itemize}
 						\item Predict never taken - branch never taken
 						\item Predict always taken - branch is always taken
-						\item Predict by opdcode - certain branch opcodes dictates if branch is expected
-						\item Taken/not taken switch - Each branch has an asociated bits for history of branch to predict branching
-						\item Branch history table - cache memory with entries of: address of branch | some number of bits which record history | infromation such as branch address
+						\item Predict by opcode - certain branch opcodes dictates if branch is expected
+						\item Taken/not taken switch - Each branch has an associated bits for history of branch to predict branching
+						\item Branch history table - cache memory with entries of: address of branch | some number of bits which record history | information such as branch address
 					\end{itemize}
 				\end{itemize}
-				The branch preduction Taken/not taken switch and branch history table is dynamic preduction and refined version is reffered to as two level or correlation-based branch history.\\
-				Delayed branch is rearrandign instruction automaticly such branch instruction occur later than actually desired.\\
+				The branch prediction Taken/not taken switch and branch history table is dynamic prediction and refined version is referred to as two level or correlation-based branch history.\\
+				Delayed branch is rearranging instruction automatically such branch instruction occur later than desired.\\
 		\subsection{Processor Organization for Pipelining}
-			To improve pipelining the processors L1 cache is seperated into I cache and D chace to remove conflicts.\\
-			Likewise is EXS divided into different units allowing pipelines to send instructions to different units while other are in use.\\
-			A buffer can also be applied for operands to EX units until operands are avaliable.\\
+			To improve pipelining the processors L1 cache is separated into I cache and D cache to remove conflicts.\\
+			Likewise, is EXS divided into different units allowing pipelines to send instructions to different units while other are in use.\\
+			A buffer can also be applied for operands to EX units until operands are available.\\
 	\section{Reduced Instruction Set Computers}
-		\subsection{Instruciton execution characteristics}
-			For Computers the most expensive things are software, therefore high level languages (HLL) have been developed to speed up programming.\\
-			This have in result created a semantic gap where the HLLs does not refelct computer architecture.\\
+		\subsection{Instruction execution characteristics}
+			For Computers the most expensive things are software, therefore high-level languages (HLL) have been developed to speed up programming.\\
+			This have in result created a semantic gap where the HLLs does not reflect computer architecture.\\
 			One way to close the gap is to create a large instruction set matching the HLL and dozens of addressing modes.\\
-			A different apporach is making the architecture simpler but faster rather than complex.\\
-			The most used operations in HLLs is simple movement of data, to speed up more registers can be avaliable\\
-			Likewisei is conditinal statements (IF, LOOP) very used, making sequence mechanism of the instruction set important.\\
-			The most time consuming part of programs is procedure calls, to speed it up two obsevation can be mode
+			A different approach is making the architecture simpler but faster rather than complex.\\
+			The most used operations in HLLs are simple movement of data, to speed up more registers can be available\\
+			Likewise, are conditional statements (IF, LOOP) very used, making sequence mechanism of the instruction set important.\\
+			The most time-consuming part of programs is procedure calls, to speed it up two observations can be mode
 			\begin{itemize}
 				\item Most calls are with fewer than 6 arguments - making the number of words required per procedure activation small
 				\item Most calls have a narrow depth of invocation - making the operand references highly localized
 			\end{itemize}
 		\subsection{Large register files}
-			Two approaches is taken to maximise register usage\\
+			Two approaches are taken to maximize register usage\\
 			In software where the most frequent data is put into registers.\\
 			And in hardware is more registers.\\
-			Since most variables are local scalars registers can be split up into windows of registers for a procedure.\\
-			Therefore by calling a procedure the registers does not need to be saved to memory.\\
+			Since most variables are local scalars, registers can be split up into windows of registers for a procedure.\\
+			Therefore, by calling a procedure the registers do not need to be saved to memory.\\
 			For parsing and returning data a shared window can be used where parameters and returns can be used, such no movement of data is needed.\\
 			In this way the registers can be implemented as a circular buffer\\
 			\includegraphics[width=250px]{assets/registerBuffer.png}\\
 			For global variables the most frequent can be assigned registers and less used can be in memory.\\
-			This approach make the registers into a small very, somewhat inneficcient due to windows likely not being used up, fast buffer.\\[4mm]
+			This approach makes the registers into a small very, somewhat inefficient due to windows likely not being used up, fast buffer.\\[4mm]
 			For the software approach the compiler can give every variable a virtual register.\\
-			The virtual registers is then put into a map with as nodes and being connected if used in the same procedure.\\
-			Then a graph coloring where to adjesent nodes can have the same color can be done with a maximum of $n$ colors being equal to number of registers.\\
+			The virtual registers are then put into a map with as nodes and being connected if used in the same procedure.\\
+			Then a graph coloring where to adjacent nodes can have the same color can be done with a maximum of $n$ colors being equal to number of registers.\\
 			Then each color can be assigned a register, such some variables can share the same register.
 		\subsection{Advantages of RISC over CISC}
-			The general trend is ricker instruction sets, with the reasoning being more simple compiler and improve performance.\\
+			The general trend is ricker instruction sets, with the reasoning being simpler compiler and improve performance.\\
 			Making the compiler gets harder due to more complex cases to use new instructions.\\
 			It is expected that fewer instruction is needed for a program hence making it smaller.\\
-			The smaller size make the program more cacheable and faster since fewer instructions is fetched.\\
+			The smaller size makes the program more cacheable and faster since fewer instructions is fetched.\\
 			But studies show that for most cases it only a 10\% reduction.\\
 			This is due to CISC favoring simple instructions and RISC using more register addresses than memory addresses.\\
-			The more complex instruction in CISC does save some clock cycles but makes the control unit more complex and make execution time of simple insturction higher.\\
-			It has also been found that the speedup comes in hand with the complex control unit since it can acts as a cache.\\
+			The more complex instruction in CISC does save some clock cycles but makes the control unit more complex and make execution time of simple instruction higher.\\
+			It has also been found that the speedup comes in hand with the complex control unit since it can act as a cache.\\
 			RISC is characterized by
 			\begin{itemize}
 				\item Machine cycle - A cycle is defined as, fetch two operands from register, perform ALU operation, store result in a register, hence making execution faster since a microprogram control store is not accessed in execution
 				\item Register to Register - Only Load and Store operations which simplifies control unit
-				\item Simple addressing modes - RISC only include simple register addressing adn may have displacement adn PC-relative
-				\item Simple instruction formats - Instructions format is a fixed length with fixed field location such as opcode, making decode of field parralizable and simplify control unit, the instruction is also aligned such it does not cross page bounderies
+				\item Simple addressing modes - RISC only include simple register addressing and may have displacement and PC-relative
+				\item Simple instruction formats - Instructions format is a fixed length with fixed field location such as opcode, making decode of field parallelizable and simplify control unit, the instruction is also aligned such it does not cross page boundaries
 			\end{itemize}
-			Interrupts is also more effective since it can happend in between operations and not wait for large complex operations.\\
+			Interrupts is also more effective since it can happen in between operations and not wait for large complex operations.\\
 			RISC is characterized by
 			\begin{itemize}
 				\item A single instruction size
 				\item That size is most often 4 bytes
-				\item A small number of dat addressing modes
+				\item A small number of data addressing modes
 				\item No indirect addressing
 				\item No operation that combine load/store with arithmetic
 				\item No more than one memory addressed operand per instruction
-				\item Does not support arbutrary alignment of data for load/store operations
+				\item Does not support arbitrary alignment of data for load/store operations
 				\item Maximum number of uses of MMU for a data address in an instruction
-				\item Number of bits for integer register specifer equal to five or more
-				\item Number of bits for floating point register specififer equal to four or more
+				\item Number of bits for integer register specifier equal to five or more
+				\item Number of bits for floating point register specifier equal to four or more
 			\end{itemize}
 			RISC can also easier be pipelined since simple instruction are easier to split into stages.\\
-			Delayed branch is used in case of dependecies, that effects does not take place before after execution of instruction.\\
-			Delayed load continues exection while waiting for laod until an execution need loading data.\\
+			Delayed branch is used in case of dependencies, that effects does not take place before after execution of instruction.\\
+			Delayed load continues execution while waiting for load until an execution need loading data.\\
 			Loop unrolling is used in case of loop which may be more effective unrolled such the body is copied number of used times
 		\subsection{Pipelining improvements}
-			By mergin the instruction decode ID and operand fetch (OF) into a single ID stage will improve speed espicially in RISC since most memory is in register and little time is spend in either.\\
-			Memory operand fetch is refered to as the load/store unit (LSU)\\
+			By merging the instruction decode ID and operand fetch (OF) into a single ID stage will improve speed especially in RISC since most memory is in register and little time is spend in either.\\
+			Memory operand fetch is referred to as the load/store unit (LSU)\\
 			The instruction buffer works such instruction and be prefetched and buffered in case of a L1 cache miss and more time is spent on a fetch.\\
 			In case of branch the buffer is flushed but speed is still improved.\\
 			The prodecoder (PD) offloads some task from the ID stage to avoid bottleneck.\\
 			The PD is between L2 cache and L1 instruction cache, since the slow L2 cache time it can spend it on decoding.\\
-			Store buffer sotre data to be written, in case of newly written data instead of waiting for write and load it can be fetched from the store buffer.\\
-			The reservartion station is such the ID can buffer up instruction and does not have to wait for the functional unit (FU) to finish\\
+			Store buffer store data to be written, in case of newly written data instead of waiting for write and load it can be fetched from the store buffer.\\
+			The reservation station is such the ID can buffer up instruction and does not have to wait for the functional unit (FU) to finish\\
 			Dedicated reservation station has a buffer for each FU, the slots in the reserve station acts as a virtual FU.\\
-			This is also reffered to as an instruction window.\\
+			This is also referred to as an instruction window.\\
 			Data forwarding makes data input to the reservation station, to combat read after write delays.\\
 			Reorder buffer allows instruction to be executed out of order (OoOE).
 	\section{Instruction level parallelism and superscalar processors}
@@ -1383,8 +1383,8 @@ _start:
 		The approach is multiple pipelines.\\
 		Unlike traditional scalar organization, which uses a single pipeline.\\
 		Using hardware and compiler the parallel execution is done without violating the intent of the program.\\
-		The performance is measured in issue rate which is the nuimber of instructions issed per instruction yccle.\\
-		For operations which have to be done in order a reorder buffer is used.\\
+		The performance is measured in issue rate which is the number of instructions issued per instruction cycle.\\
+		For operations which must be done in order a reorder buffer is used.\\
 		Superpipelined is an alternative way to improve performance by dividing pipeline stages into greater numbers such two stages can be done pr cycle, thus increasing the temporal parallelism.\\
 		\subsection{Constraints}
 			Instruction level parallelism is the degree to which on average the instructions of a program can be executed in parallel.\\
@@ -1392,14 +1392,14 @@ _start:
 			\begin{itemize}
 				\item True data dependency / Read after write (RAW) dependency
 				\item Procedural dependency - Branch problem
-				\item Resource confict - Two execution using the same resource
+				\item Resource conflict - Two execution using the same resource
 				\item Output dependency / Write after write (WAW)
 				\item Antidependency / Write after read (WAR) dependency
 			\end{itemize}
 		\subsection{Design issues}
-			The degree of instruction elvel parallelism is determined by the frequency of true data dependencies and precedural dependencies in the code.\\
-			Also determined by the operation latency, ie the time until the result of an instruction is avaliable for use as an operand in a subsequent instruction.\\
-			Machine parallelism measures the ability of the processor to take advantage of unstruction level parallelism, ie the number of parallel pipelines.\\
+			The degree of instruction level parallelism is determined by the frequency of true data dependencies and procedural dependencies in the code.\\
+			Also determined by the operation latency, i.e., the time until the result of an instruction is available for use as an operand in a subsequent instruction.\\
+			Machine parallelism measures the ability of the processor to take advantage of instruction level parallelism, i.e., the number of parallel pipelines.\\
 			Instruction issue refer to the process of init instruction execution.\\
 			Instruction issue policy is the protocol used to issue instructions.\\
 			When issuing processes there are three types of ordering
@@ -1408,16 +1408,16 @@ _start:
 				\item The order in which instructions are executed
 				\item The order in which instructions update the contents of register and memory locations
 			\end{itemize}
-			Grouped superscalar unstrciton issue policies can be categories as:
+			Grouped superscalar instruction issue policies can be categories as:
 			\begin{itemize}
-				\item In-order issue with in order completion - sequential execution and write result in the same order
+				\item In-order issue within order completion - sequential execution and write result in the same order
 				\item In order issue with out of order completion - out of order execution but the write result is the same as sequential, so allowing longer taking executions to be started earlier
 				\item Out of order issue with out of order completion - the decode and execute stages is decoupled such instruction is put into an instruction window and fetched if they do not need a dependency
 			\end{itemize}
 			Register renaming is used such values in dependent registers is not changed.\\
 			This directly combat WAR and WAW.\\
 			When a new register value is created a new register is allocated for that value.\\
-			A reference to the new register is then stored in the insttruction.
+			A reference to the new register is then stored in the instruction.
 	\section{Parallel Processing}
 		Parallel processing is categorized into
 		\begin{itemize}
@@ -1439,14 +1439,14 @@ _start:
 				\item All processors can perform the same functions
 				\item Controlled by an integrated operating system
 			\end{itemize}
-			SMP have the following advanteges
+			SMP have the following advantages
 			\begin{itemize}
 				\item Performance - Allow portions of work to be performed parallel
 				\item Availability - Failure of a single processor does not halt
 				\item Incremental growth - Performance can be increased by adding processors incrementally
 				\item Scaling - Pricing will be lowered by vendors due to large range of products and prices
 			\end{itemize}
-			A time-shared bus is used for DMA byu having the features
+			A time-shared bus is used for DMA by having the features
 			\begin{itemize}
 				\item Addressing - Distinguish between different modules (processors)
 				\item Arbitration - Priority scheme for allowing modules to be primary
@@ -1454,58 +1454,58 @@ _start:
 			\end{itemize}
 			The bus is used due to its simplicity, flexibility and reliability in case a module failure.\\
 			The main drawback is performance.\\
-			Therefore each processor is equipped with a cache memory to reduce bus use.\\
+			Therefore, each processor is equipped with a cache memory to reduce bus use.\\
 			The operation system responsible for schedule execution and allocate resources.\\
 			Some issues arise with this responsibility
 			\begin{itemize}
 				\item Simultaneous concurrent processes - OS routines need to allow several processors to execute the same code and avoid deadlock or invalid operations
-				\item Scheduling - assing ready processes to available processors
+				\item Scheduling - assign ready processes to available processors
 				\item Synchronization - Enforce mutual exclusion and event ordering
 				\item Memory management - Exploit available hardware parallelism for performance with consistency
-				\item Reliability and fault tolerance - Gracefull degradation in the face of processor failure and restructure management tables according in processor failure
+				\item Reliability and fault tolerance - Graceful degradation in the face of processor failure and restructure management tables according in processor failure
 			\end{itemize}
 		\subsection{Cache Coherence and the MESI Protocol}
-			Cache coherence problem occour when multiple copies of same data axist in different caches simultaneously.\\
+			Cache coherence problem occurs when multiple copies of same data exist in different caches simultaneously.\\
 			Approach is the MESI (modified,exclusive,shared,invalid) protocol.\\
-			Objective is get appropriate cache and stay there through numerous reads and writes while mainting consistency.\\
+			Objective is get appropriate cache and stay there through numerous reads and writes while maintaining consistency.\\
 			\subsubsection{Software Solutions}
 				Achieve cache consistency through operation system and compiler\\
-				Issue arise with compilers being conservative and leading to inefficient cache utilization\\
+				Issue arises with compilers being conservative and leading to inefficient cache utilization\\
 				Done by analyzing the code for unsafe and mark those points from be cached.\\
-				A more efficient approach analyze code to determien safe periods for shared variables, enforced with instruction inserted in code.\\
+				A more efficient approach analyze code to determine safe periods for shared variables, enforced with instruction inserted in code.\\
 			\subsubsection{Hardware Solutions}
 				Also known as cache coherence protocols.\\
-				Transparent to the programmer and is dealt with when problems arises.\\
+				Transparent to the programmer and is dealt with when problems arise.\\
 				Comes in two categories directory protocols and snoopy protocols\\
 				\textbf{Directory protocol }\\
-				Collect and maintain information where copies is stored, by a centralized controller in a directory stored in main memory.\\
-				The directory contain global information and is checked for cache changes before data is requested.\\
-				The centralized controller maintains exclusive access for writing, and alerts other cache with copies to invalidate.\\
-				Drawbacks is a lot of bus interactions and overhead communcation.\\
+				Collect and maintain information where copies are stored, by a centralized controller in a directory stored in main memory.\\
+				The directory contains global information and is checked for cache changes before data is requested.\\
+				The centralized controller maintains exclusive access for writing and alerts other cache with copies to invalidate.\\
+				Drawbacks is a lot of bus interactions and overhead communication.\\
 				\textbf{Snoopy protocols}\\
 				Each cache has responsibility to maintain coherence.\\
-				Updates is anounced to caches by caches.\\
+				Updates is announced to caches by caches.\\
 				Two basic approaches: write-invalidate and write-updates.\\
 				Write-invalidate multiple readers and a single writer, mostly used\\
-				Write-update multiple writers and multiple readers, announce when updates is happening.\\
+				Write-update multiple writers and multiple readers, announce when updates are happening.\\
 			\subsubsection{The MESI Protocol}
 				Provides cache consistency on an SMP.\\
 				Data include two status bits such data can be in four states
 				\begin{itemize}
-					\item Modified - Cache has been modfied and avaliable only in this cache
+					\item Modified - Cache has been modified and available only in this cache
 					\item Exclusive - Not modified but only saved in main memory and current cache
-					\item Shared - Not modifed saved in main meory and multiple caches
+					\item Shared - Not modified saved in main memory and multiple caches
 					\item Invalid - The cache data is not valid anymore
 				\end{itemize}
 				\includegraphics[width=300px]{assets/MESI.png}\\
 				When cache operation is done there is four action results.\\
 				\begin{itemize}
-					\item Read miss - A cache miss happends and a read is initiated with the outcomes
+					\item Read miss - A cache miss happens, and a read is initiated with the outcomes
 					\begin{itemize}
-						\item Other caches have not modifed the data, and is read from main memory
-						\item Other caches have a copy and is signalled to change to shared state
-						\item A cache contains modified dopy, is signalled to save it to memory, and change to shared and data is read from shared bus
-						\item No other cache have a copy is read from main memory and set to exclusive
+						\item Other caches have not modified the data, and is read from main memory
+						\item Other caches have a copy and is signaled to change to shared state
+						\item A cache contains modified dopy, is signaled to save it to memory, and change to shared and data is read from shared bus
+						\item No other cache has a copy is read from main memory and set to exclusive
 					\end{itemize}
 					\item Read hit - No state change
 					\item Write miss - Gain data from memory, signal to bus read-with-intent-to-modify (WRITM), two scenarios: a cache contains modified data and gives bus to the cache for save and no cache contain data and a read and write is performed
@@ -1518,8 +1518,8 @@ _start:
 				\end{itemize}
 				Having this in L1 cache with write through to L2 cache will work.
 		\subsection{Multithreading and Chip Multiprocessors}
-			The optimization of a single threading has reached a limit due to ocmplexity and power consumtion.\\
-			Multithreading dividedes instruction streams into smaller streams known as threads such executed in parallel.\\
+			The optimization of a single threading has reached a limit due to complexity and power consumption.\\
+			Multithreading dividends instruction streams into smaller streams known as threads such executed in parallel.\\
 			Process - instance of program with two characteristics - resource ownership and scheduling/execution  ability\\
 			Process switch - switch from process to process and save current state\\
 			Thread - dispatchable unit of work within a process\\
@@ -1531,37 +1531,37 @@ _start:
 				Instruction fetching takes place on a thread basis.\\
 				Four approaches to multithreading
 				\begin{itemize}
-					\item Interleaved multithreading - The processor deals with two or more thread contexts at a time switching from one thread ot another at each clock cycle
-					\item Blocked multithreading - The instructions of a thread are executed successively until an event occours that may cause delay such as cache miss
+					\item Interleaved multithreading - The processor deals with two or more thread contexts at a time switching from one thread to another at each clock cycle
+					\item Blocked multithreading - The instructions of a thread are executed successively until an event occurs that may cause delay such as cache miss
 					\item Simultaneous multithreading (SMT) - Instruction are simultaneously issued from multiple threads to the execution units of a superscalar processor
-					\item Chip multiprocesing - multiple cores each handling sepeate threads
+					\item Chip multiprocessing - multiple cores each handling separate threads
 				\end{itemize}
 		\subsection{Clusters}
 			 A group of interconnected computers working together.\\
-			 Benefites include
+			 Benefits include
 			 \begin{itemize}
 			 	\item Absolute scalability - surpass the power of even the largest standalone machines
-			 	\item Incremental scalability - units can be added througout use to scale
-			 	\item High availability - A failure of a node does not effect the rest of the cluster
+			 	\item Incremental scalability - units can be added throughout use to scale
+			 	\item High availability - A failure of a node does not affect the rest of the cluster
 			 	\item Superior price/performance - common components and computers can be used with more competition
 			\end{itemize}
 			Can be configured based if the cluster share access to the same disks.\\
-			The most simple each computer has its own disks.\\
+			The simplest each computer has its own disks.\\
 			Other alternative is a shared disk space.\\
 			Passive standby - another computer to the primary stands by and listens to heart beats such in case of failure in can take over.\\
-			On a seperate server the disk can be partioned into volumes for each computer and in case of failure the colume is handed over.
+			On a separate server the disk can be partitioned into volumes for each computer and in case of failure the volume is handed over.
 		\subsection{Nonuniform memory access}
 			Uniform memory access (UMA) all processors have access to all parts with same access time.\\
 			Nonuniform memory access (NUMA) access to all parts with different access time.\\
-			Cache-coehrent NUMA (CC-NUMA) cache cohrence in with NUMA.\\
-			SMP system have practical limit where bus performance becomes a botthenect.\\
-			is organized in nodes contailing multiple processors each with its own L1 and L2 cahce and main memory.\\
-			Is connected by means such as netowrk.\\
+			Cache-coherent NUMA (CC-NUMA) cache coherence in with NUMA.\\
+			SMP system have practical limit where bus performance becomes a bottleneck.\\
+			is organized in nodes containing multiple processors each with its own L1 and L2 cache and main memory.\\
+			Is connected by means such as network.\\
 			If data is needed from remote it is fetched and coherence is kept using some sort of directory.\\
-			This is more scaleabpe than SMP and when data is placed out it is likely to not need to fetch around much.\\
+			This is more scalable than SMP and when data is placed out it is likely to not need to fetch around much.\\
 			But requires software changes from both application and operation system.
 	\section{Hardware Performance Issues}
-		Processor designs have focused on in chornological order:
+		Processor designs have focused on in chronological order:
 		\begin{itemize}
 			\item Pipelining
 			\item Superscalar
@@ -1569,9 +1569,9 @@ _start:
 		\end{itemize}
 		Power requirements have grown exponentially with chip density and clock frequency\\
 		Pollacks rule - performance increase is roughly proportional to the square root of increase in complexity\\
-		Threading granularity - minimal unit of work that can be benficially parallelized, the finner granularity the more parralizable is the program.\\
+		Threading granularity - minimal unit of work that can be beneficially parallelized, the finer granularity the more parallelizable is the program.\\
 		\subsection{Multicore Organization}
-			The mian variables for multicore organization
+			The main variables for multicore organization
 			\begin{itemize}
 				\item Number of core processor pr. chip
 				\item Number of levels of cache memory
@@ -1579,16 +1579,16 @@ _start:
 				\item Whether simultaneous multithreading (SMT) is employed
 				\item Type of cores
 			\end{itemize}
-			The use of shared higher-lvel cache in the chip has several advantages over excusive reliance on dedicated caches
+			The use of shared higher-level cache in the chip has several advantages over excusive reliance on dedicated caches
 			\begin{itemize}
 				\item Reduce overall miss rates
-				\item Data shared by multiple cores is not replicated at shared cache lavel
+				\item Data shared by multiple cores is not replicated at shared cache level
 				\item With proper line replacement algorithms the amount of shared cache allocated to each core is dynamic so that threads have less locality can employ more cache
 				\item Inter core communication is easy
 				\item Confines the cache coherency problem to the lower cache levels
 			\end{itemize}
 		\subsection{Heterogeneous Multicore Organization}
-			Homogenous multicore organization - multiple cores is a chip with multiple idential cores\\
+			Homogenous multicore organization - multiple cores is a chip with multiple identical cores\\
 			Heterogeneous multicore organization - Mix of different types of cores\\
 			Different types of cores may be cores which focus on some instruction sets such as GPU cores which focus on matrix and vector processing.\\
 			Heterogeneous System Architecture (HSA) key features is
@@ -1596,34 +1596,34 @@ _start:
 				\item Entire virtual memory space is visible to both CPU and GPU
 				\item Virtual memory system brings in pages to physical main memory as needed
 				\item Coherence memory policy ensures that CPU and GPU caches both see correct data
-				\item Unified programming interface that enables users to exploit the parallel capabilities of the GPUs withing program that rely on CPu execution as well
+				\item Unified programming interface that enables users to exploit the parallel capabilities of the GPUs withing program that rely on CPU execution as well
 			\end{itemize}
-			Digital signal processors (DSPs) provides fast processing of analogue data to digital data.\\
-			Arms big.Little architecture focus on a power core and an efficency core.\\
-			Comes in two models Migration model where power and efficiency core is paired and work is given to appropriate core while other goes idle.\\
-			Multiprocessing (MP) allow a mix of cores to be on and choosen on power demand from application, more complicated but more effecient.\\
-	\section{Control Unit Operation and Microporgrammed Control}
+			Digital signal processors (DSPs) provide fast processing of analogue data to digital data.\\
+			Arms big.Little architecture focus on a power core and an efficiency core.\\
+			Comes in two models Migration model where power and efficiency core are paired, and work is given to appropriate core while other goes idle.\\
+			Multiprocessing (MP) allow a mix of cores to be on and chosen on power demand from application, more complicated but more efficient.\\
+	\section{Control Unit Operation and Microprogrammed Control}
 		\subsection{Micro operations}
-			Micro operations is the atomic operations of a processor.\\
-			A micro operation is performed in a single time unit.\\
+			Micro operations are the atomic operations of a processor.\\
+			A micro-operation is performed in a single time unit.\\
 			Example the fetch cycle\\
-			The fetch cycle invovles the four registers
+			The fetch cycle involves the four registers
 			\begin{itemize}
-				\item Memory address register (MAR) - specifies the address in memory for a read for write operaiton
+				\item Memory address register (MAR) - specifies the address in memory for a read for write operation
 				\item Memory buffer register (MBR) - value to be stored in memory or the last value read from memory
 				\item Program counter (PC) - next instruction to be fetched
 				\item Instruction register (IR) - last instruction fetched
 			\end{itemize}
-			The fetch cycle consist of
+			The fetch cycle consists of
 			\begin{enumerate}
 				\item Move the PC address to the MAR
 				\item MAR is moved to bus 
 				\item Control unit issues a read and result copied into MBR 
 				\item Pc is incremented
 			\end{enumerate}
-			The last two steps can be at the same time since they do not effect each other.\\
-			Grouping can be done if the proper sequence of events is followed and conflicts is avoided.\\
-			When performing operations a 2 bit register is kept up to date for the current state of the program execution where
+			The last two steps can be at the same time since they do not affect each other.\\
+			Grouping can be done if the proper sequence of events is followed, and conflicts is avoided.\\
+			When performing operations, a 2-bit register is kept up to date for the current state of the program execution where
 			\begin{itemize}
 				\item 00: fetch
 				\item 01: Indirect
@@ -1638,7 +1638,7 @@ _start:
 				\item Describe the micro-operations that the processor performs
 				\item Determine the functions that the control unit must perform to cause the micro-operations to be performed
 			\end{itemize}
-			The control unit perform two basic task
+			The control unit perform two basic tasks
 			\begin{itemize}
 				\item Sequencing - Make the processor perform proper sequence of micro-operations
 				\item Execution - Cause micro-operations to be performed
@@ -1651,30 +1651,30 @@ _start:
 					\item Flags - Status of the processor and outcome of previous ALU
 					\item Control signal from control bus
 				\end{itemize}
-				From which it have to create the outputs
+				From which it must create the outputs
 				\begin{itemize}
-					\item Control signal within the processor - Comes in two types: data to be moved from ine register to another and activate specific ALU functions
-					\item Control singal to control bus - Two types: control singal to memory and control singal to the I/O modules
+					\item Control signal within the processor - Comes in two types: data to be moved from one register to another and activate specific ALU functions
+					\item Control signal to control bus - Two types: control signal to memory and control signal to the I/O modules
 				\end{itemize}
-				Looking at the fetch cycle using by the signalling it will become
+				Looking at the fetch cycle using by the signaling it will become
 				\begin{enumerate}
 					\item Signal open gate for content from MAR onto the address bus
 					\item Memory read signal on the control bus
 					\item Signal open gate from data bus in MBR
-					\item Control signal to ALu to add 1 to the PC
+					\item Control signal to ALU to add 1 to the PC
 				\end{enumerate}
-				For optimization the processor can have both an internal bus and access to external to limit traffic on external which is only required internally, but require more controle signal to differentiate.
+				For optimization the processor can have both an internal bus and access to external to limit traffic on external which is only required internally but require more control signal to differentiate.
 		\subsection{Control Unit Implementation}
-			Hardwired approach tries to implement the control unit using logic gates with logic singal as input and output logic signals as output.\\
+			Hardwired approach tries to implement the control unit using logic gates with logic signal as input and output logic signals as output.\\
 			This the circuit can be construction by making a truth table and finding an optimized boolean expression.\\
 			Problem is the equations become very complicated when all functions is implemented.
 			An alternative is microprogrammed control.\\
 			This implements firmware (middle between hardware and software) using microprogramming language.\\
-			Each line of the language describes a set of micro-operations occouring at one time and is known as a microinstruction.\\
-			This construct control words which describe the actions to be taken be the processor, like singal and conditions.\\
+			Each line of the language describes a set of micro-operations occurring at one time and is known as a microinstruction.\\
+			This construct control words which describe the actions to be taken be the processor, like signal and conditions.\\
 			The control unit then implements a control memory, which have a concise description of the complete operation of the control unit with the sequence of microinstructions.\\
 			The next instruction or microprogram is then loaded from memory into the control buffer register, which when read will execute the content.\\
-			What to be laoded into the control buffer register is based on three decisions
+			What to be loaded into the control buffer register is based on three decisions
 			\begin{itemize}
 				\item Get the next instruction - add 1 to the control address register
 				\item Jump to new routine based on a jump microinstruction
